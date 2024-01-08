@@ -168,6 +168,19 @@ const App = () => {
       } catch (error) {
         // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
       }
+    } else {
+      try {
+        await fetch(`http://localhost:8889/api/shopping-cart-items`, {
+          method: "DELETE",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Cookie: `ms2a=${token}`,
+          },
+        });
+      } catch (error) {
+        // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
+      }
     }
   };
 
