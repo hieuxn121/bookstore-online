@@ -27,16 +27,14 @@ const App = () => {
               {isLogedIn ? <Sidebar isSidebar={isSidebar} /> : <></>}
               <main className="content">
                 {isLogedIn ? <Topbar setIsSidebar={setIsSidebar} /> : <></>}
+                <CssBaseline />
                 <Routes>
                   {!isLogedIn ? (
                     <Route path="/login" element={<SignInSide />} />
                   ) : (
                     <Route path="/login" element={<Navigate to="/" />} />
                   )}
-                </Routes>
-                <CssBaseline />
-                <Routes>
-                  {/* {isLogedIn ? (
+                  {isLogedIn ? (
                     <Route path="/" element={<Dashboard />} />
                   ) : (
                     <Route path="*" element={<Navigate to="/login" />} />
@@ -65,8 +63,7 @@ const App = () => {
                     <Route path="/orders/:id" exact element={<OrderDetail />} />
                   ) : (
                     <Route path="*" element={<Navigate to="/login" />} />
-                  )} */}
-                  <Route path="/login" exact element={<SignInSide />} />
+                  )}
                 </Routes>
               </main>
             </div>
