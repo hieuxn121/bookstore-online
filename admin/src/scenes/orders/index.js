@@ -40,7 +40,6 @@ const Orders = () => {
   const colors = tokens(theme.palette.mode);
   const [orders, setOrders] = useState([]);
   const [updateStatus, setUpdateStatus] = useState(false);
-
   const navigate = useNavigate();
   const fetchOrders = async () => {
     try {
@@ -62,7 +61,7 @@ const Orders = () => {
     }
   };
 
-  const handleChange = async (event) => {
+  const handleChange = async (event, orderId) => {
     event.preventDefault();
     const payload = {
       status: event.target.value,
@@ -74,7 +73,7 @@ const Orders = () => {
     });
 
     try {
-      const res = await fetch(`http://localhost:8889/api/orders/status`, {
+      const res = await fetch(`http://localhost:8889/api/orders/${orderId}`, {
         method: "PUT",
         body: formData,
         headers: {
@@ -109,12 +108,12 @@ const Orders = () => {
       field: "orderStatus",
       headerName: "Order status",
       flex: 0.3,
-      renderCell: ({ row: { orderStatus } }) => {
+      renderCell: ({ row: { orderStatus, orderId } }) => {
         return (
           <FormControl sx={{ minWidth: 120 }} className={classes.formControl}>
             <Select
               value={orderStatus}
-              onChange={handleChange}
+              onChange={(event) => handleChange(event, orderId)}
               displayEmpty
               inputProps={{
                 "aria-label": "Without label",

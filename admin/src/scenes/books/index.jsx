@@ -102,12 +102,12 @@ const Book = () => {
     },
     {
       field: "remainingQuantity",
-      headerName: "Importing Price",
+      headerName: "Remain Quantity",
       flex: 0.3,
     },
     {
       field: "importingPrice",
-      headerName: "Importing Price",
+      headerName: "Imported Price",
       flex: 0.3,
     },
     {

@@ -21,7 +21,7 @@ import { bookApi } from "./apis";
 import { HTTP_STATUS, SNACKBAR } from "./constants";
 import "./global.css";
 const App = () => {
-  const openSnackbar = useSnackbar();
+  const { openSnackbar } = useSnackbar();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({
@@ -207,6 +207,17 @@ const App = () => {
   };
 
   const handleEmptyCart = async () => {
+    try {
+      await fetch(`http://localhost:8889/api/shopping-cart-items/clear`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Cookie: `ms2a=${token}`,
+        },
+      });
+    } catch (error) {
+      openSnackbar(SNACKBAR.ERROR, "Delete cart failed");
+    }
     setCart({
       id: null,
       lineItems: [],
