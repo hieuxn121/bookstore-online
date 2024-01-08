@@ -47,15 +47,25 @@ const RegisterForm = () => {
         email: values.email,
         password: values.password,
       };
-      const { status, data } = await userApi.signup(bodyPayload);
-      if (status === HTTP_STATUS.OK && data?.statusCode === "00000") {
-        history.push({
-          pathname: "/send-otp",
-          state: {
-            email: values.email,
-          },
-        });
-      } else if (status === HTTP_STATUS.BAD_REQUEST) {
+
+      const formData = new FormData();
+      Object.keys(bodyPayload).forEach((key) => {
+        formData.append(key, bodyPayload[key]);
+      });
+
+      try {
+        const { status, data } = await userApi.signup(bodyPayload);
+        if (status === HTTP_STATUS.OK) {
+          history.replace({
+            pathname: "/send-otp",
+            state: {
+              email: values?.email,
+            },
+          });
+        } else if (status === HTTP_STATUS.BAD_REQUEST) {
+          openSnackbar(SNACKBAR.ERROR, "Try another email");
+        }
+      } catch (error) {
         openSnackbar(SNACKBAR.ERROR, "Try another email");
       }
     },

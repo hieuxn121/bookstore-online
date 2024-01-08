@@ -4,10 +4,7 @@ import { tokens } from "../../theme";
 import { getData } from "../../utils/localStorage";
 import Header from "../../components/Header";
 import React, { useEffect } from "react";
-import {
-  DeleteOutline,
-  MoreHorizSharp,
-} from "@mui/icons-material";
+import { DeleteOutline, MoreHorizSharp } from "@mui/icons-material";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getBookId, getBooks } from "../../store/bookSlice";
@@ -25,13 +22,15 @@ const Book = () => {
   const { openSnackbar } = useSnackbar();
 
   useEffect(() => {
-    dispatch(getBooks({
-      title: "",
-      author: "",
-      category: "",
-      page: "",
-      size: "",
-    }));
+    dispatch(
+      getBooks({
+        title: "",
+        author: "",
+        category: "",
+        page: "",
+        size: "",
+      })
+    );
   }, [dispatch]);
 
   const { books, book } = useSelector((state) => state.books);
@@ -42,7 +41,7 @@ const Book = () => {
   const [openAdd, setOpenAdd] = React.useState(false);
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
-  
+
   const handleDeleteBook = async (id) => {
     try {
       const res = await fetch(`http://localhost:8889/api/books/${id}`, {
@@ -62,7 +61,7 @@ const Book = () => {
     } catch (error) {
       openSnackbar(SNACKBAR.ERROR, "Delete book failed");
     }
-  }
+  };
 
   const columns = [
     {
@@ -83,17 +82,22 @@ const Book = () => {
     {
       field: "imageBase64Src",
       headerName: "Image",
-      flex: 0.5,
+      flex: 0.3,
       renderCell: ({ row: { imageBase64Src } }) => {
         return (
-          <img src={imageBase64Src} width="auto" height="80%" alt="Base64 Image"/>
+          <img
+            src={imageBase64Src}
+            width="auto"
+            height="80%"
+            alt="Base64 Image"
+          />
         );
       },
     },
     {
       field: "category",
       headerName: "Category",
-      flex: 0.5,
+      flex: 0.3,
     },
     {
       field: "soldQuantity",
@@ -118,29 +122,29 @@ const Book = () => {
     {
       field: "update",
       headerName: "Update Book",
-      flex: 0.5,
+      flex: 0.3,
       renderCell: ({ row: { id } }) => {
         return (
           <>
-            <Box height="55%" m="0 auto">
-              <Button
+            <Box height="55%" m="0" display="flex" justifyContent="flex-start">
+              <Typography
+                style={{ cursor: "pointer" }}
+                color={colors.grey[200]}
                 onClick={async () => {
                   await dispatch(getBookId(id));
                   await dispatch(getCategories());
                   handleOpen();
                 }}
               >
-                <Typography color={colors.grey[200]}>
-                  <MoreHorizSharp />
-                </Typography>
-              </Button>
-              <Button
+                <MoreHorizSharp />
+              </Typography>
+              <Typography
                 onClick={() => handleDeleteBook(id)}
+                color={colors.redAccent[500]}
+                style={{ marginLeft: "10px" }}
               >
-                <Typography color={colors.redAccent[500]}>
-                  <DeleteOutline />
-                </Typography>
-              </Button>
+                <DeleteOutline />
+              </Typography>
             </Box>
           </>
         );
@@ -150,7 +154,11 @@ const Book = () => {
 
   return (
     <Box mx="20px">
-      <ModalAddBook open={openAdd} setOpenAdd={setOpenAdd} handleClose={handleCloseAdd} />
+      <ModalAddBook
+        open={openAdd}
+        setOpenAdd={setOpenAdd}
+        handleClose={handleCloseAdd}
+      />
       {book ? <ModalUpdateBook open={open} handleClose={handleClose} /> : <></>}
 
       <Header title="Books" subtitle="Managing Books " />
