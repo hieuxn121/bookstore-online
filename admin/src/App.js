@@ -36,7 +36,7 @@ const App = () => {
                 </Routes>
                 <CssBaseline />
                 <Routes>
-                  {isLogedIn ? (
+                  {/* {isLogedIn ? (
                     <Route path="/" element={<Dashboard />} />
                   ) : (
                     <Route path="*" element={<Navigate to="/login" />} />
@@ -65,7 +65,8 @@ const App = () => {
                     <Route path="/orders/:id" exact element={<OrderDetail />} />
                   ) : (
                     <Route path="*" element={<Navigate to="/login" />} />
-                  )}
+                  )} */}
+                  <Route path="/login" exact element={<SignInSide />} />
                 </Routes>
               </main>
             </div>

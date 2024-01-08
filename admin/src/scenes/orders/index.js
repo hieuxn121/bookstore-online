@@ -132,7 +132,7 @@ const Orders = () => {
     { field: "modifiedAt", headerName: "Updated at", flex: 0.3 },
     {
       field: "update",
-      headerName: "Update Book",
+      headerName: "View detail order",
       flex: 0.5,
       renderCell: ({ row: { orderId } }) => {
         return (

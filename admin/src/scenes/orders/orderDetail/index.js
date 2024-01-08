@@ -32,7 +32,6 @@ const OrderDetail = () => {
       });
       const data = await res.json();
       if (data.statusCode === "00000") {
-        console.log("data?.data: ", data?.data);
         setOrderDetail(data?.data?.orderDetailDtos);
         setAuthor({
           name: data?.data?.fullName,

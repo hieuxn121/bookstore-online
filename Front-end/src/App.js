@@ -21,7 +21,7 @@ import { bookApi } from "./apis";
 import { HTTP_STATUS, SNACKBAR } from "./constants";
 import "./global.css";
 const App = () => {
-  const { openSnackbar } = useSnackbar();
+  // const { openSnackbar } = useSnackbar();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({
@@ -44,10 +44,10 @@ const App = () => {
       if (status === HTTP_STATUS.OK) {
         setProducts(data?.data?.content);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Get list books failed");
+        // openSnackbar(SNACKBAR.ERROR, "Get list books failed");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Get list books failed");
+      // openSnackbar(SNACKBAR.ERROR, "Get list books failed");
     }
   };
 
@@ -65,7 +65,7 @@ const App = () => {
         setCategories(categoriesConverted);
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Get list categories failed");
+      // openSnackbar(SNACKBAR.ERROR, "Get list categories failed");
     }
   };
 
@@ -113,7 +113,7 @@ const App = () => {
           },
         });
       } catch (error) {
-        openSnackbar(SNACKBAR.ERROR, "Create cart failed");
+        // openSnackbar(SNACKBAR.ERROR, "Create cart failed");
       }
     }
   };
@@ -166,7 +166,7 @@ const App = () => {
           },
         });
       } catch (error) {
-        openSnackbar(SNACKBAR.ERROR, "Update cart failed");
+        // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
       }
     }
   };
@@ -202,7 +202,7 @@ const App = () => {
         },
       });
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Update cart failed");
+      // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
     }
   };
 
@@ -216,7 +216,7 @@ const App = () => {
         },
       });
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Delete cart failed");
+      // openSnackbar(SNACKBAR.ERROR, "Delete cart failed");
     }
     setCart({
       id: null,
