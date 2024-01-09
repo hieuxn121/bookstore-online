@@ -42,18 +42,25 @@ const SigninForm = () => {
           setError("Email hoặc password không đúng !");
         } else {
           openSnackbar(SNACKBAR.SUCCESS, "Đăng nhập thành công");
-          auth.signin(
-            {
-              name: data.data.fullName,
-              email: values.email,
-              id: data.data.id,
-            },
-            data.data.accessToken,
-            () => {
-              console.log("TADA");
-              window.location.href = "/";
-            }
-          );
+          if (data?.data?.role === "ROLE_USER") {
+            auth.signin(
+              {
+                name: data.data.fullName,
+                email: values.email,
+                id: data.data.id,
+                role: data.data.role,
+              },
+              data.data.accessToken,
+              () => {
+                window.location.href = "/";
+              }
+            );
+          } else {
+            openSnackbar(
+              SNACKBAR.ERROR,
+              "Tài khoản không có quyền truy cập vào trang web"
+            );
+          }
         }
       } else {
         openSnackbar(SNACKBAR.ERROR, "Email hoặc password không đúng");

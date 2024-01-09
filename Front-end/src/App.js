@@ -11,6 +11,7 @@ import Login from "./components/Login/SignInSide";
 import Register from "./components/Register";
 import UserProfile from "./components/UserProfile";
 import OtpInputWithValidation from "./components/OTP/OTPSide";
+import OrderHistory from "./components/OrderHistory";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
@@ -21,6 +22,7 @@ import { getData } from "./utils/localStorage";
 import { bookApi } from "./apis";
 import { HTTP_STATUS, SNACKBAR } from "./constants";
 import "./global.css";
+import OrderHistoryDetail from "./components/OrderHistory/OrderHistoryDetail";
 
 const MuiAlert = React.forwardRef(function MuiAlert(props, ref) {
   return <Alert elevation={3} ref={ref} variant="filled" {...props} />;
@@ -150,6 +152,7 @@ const App = () => {
       }
     }
   };
+
   const handleUpdateCartQty = async (
     lineItemId,
     quantity,
@@ -374,6 +377,24 @@ const App = () => {
                 <Route path="/user-profile" exact>
                   {token ? (
                     <UserProfile />
+                  ) : (
+                    () => {
+                      window.location.href = "/";
+                    }
+                  )}
+                </Route>
+                <Route path="/orders-history" exact>
+                  {token ? (
+                    <OrderHistory />
+                  ) : (
+                    () => {
+                      window.location.href = "/";
+                    }
+                  )}
+                </Route>
+                <Route path="/orders-history/:id" exact>
+                  {token ? (
+                    <OrderHistoryDetail />
                   ) : (
                     () => {
                       window.location.href = "/";

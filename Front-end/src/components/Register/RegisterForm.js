@@ -11,6 +11,7 @@ import * as yup from "yup";
 import { userApi } from "../../apis";
 import { useAuth, useSnackbar } from "../../contexts";
 import { HTTP_STATUS, SNACKBAR } from "../../constants";
+import { Link } from "react-router-dom";
 
 const validationSchema = yup.object({
   fullname: yup.string().required("Tên người dùng không được để trống"),
@@ -30,7 +31,6 @@ const validationSchema = yup.object({
 
 const RegisterForm = () => {
   const history = useHistory();
-  const auth = useAuth();
   const { openSnackbar } = useSnackbar();
   const formik = useFormik({
     initialValues: {
@@ -41,7 +41,6 @@ const RegisterForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      // Handle form submission logic here
       const bodyPayload = {
         fullName: values.fullname,
         email: values.email,
@@ -56,12 +55,19 @@ const RegisterForm = () => {
       try {
         const { status, data } = await userApi.signup(bodyPayload);
         if (status === HTTP_STATUS.OK) {
-          history.replace({
-            pathname: "/send-otp",
-            state: {
-              email: values?.email,
-            },
-          });
+          if (
+            data?.statusCode === "00030" &&
+            data?.message === "email_already_used"
+          ) {
+            openSnackbar(SNACKBAR.ERROR, "Tài khoản email đã tồn tại");
+          } else {
+            history.replace({
+              pathname: "/send-otp",
+              state: {
+                email: values?.email,
+              },
+            });
+          }
         } else if (status === HTTP_STATUS.BAD_REQUEST) {
           openSnackbar(SNACKBAR.ERROR, "Thử tài khoản email khác");
         }
@@ -138,12 +144,14 @@ const RegisterForm = () => {
                 formik.touched.confirmPassword && formik.errors.confirmPassword
               }
             />
-
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Đăng kí
             </Button>
           </form>
         </Box>
+        <Link to="/login" variant="body2">
+          Quay lại trang đăng nhập
+        </Link>
       </Box>
     </Grid>
   );

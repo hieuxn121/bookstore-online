@@ -1,84 +1,86 @@
-import React, { useState, useEffect } from "react";
-import { Button, Grid, Typography } from "@material-ui/core";
-import { useForm, FormProvider } from "react-hook-form";
+import React from "react";
+import { Typography } from "@material-ui/core";
+import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import FormInput from "./CustomTextField";
-import { userApi } from "../../apis";
-import { useSnackbar } from "../../contexts";
-import { HTTP_STATUS, SNACKBAR } from "../../constants";
+import TextField from "@mui/material/TextField";
+import { useFormik } from "formik";
+import Box from "@mui/material/Box";
+import * as yup from "yup";
 
-const AddressForm = ({ checkoutToken, test }) => {
-  const methods = useForm();
-  const { openSnackbar } = useSnackbar();
-  const [initialValues, setInitialValues] = useState({
-    fullName: "",
-    email: "",
-    address: "",
-    phone: "",
+const validationSchema = yup.object({
+  fullName: yup.string().required("Tên người dùng không được để trống"),
+  email: yup
+    .string()
+    .email("Email sai định dạng")
+    .required("Email không được để trống"),
+  address: yup.string().required("Địa chỉ không được để trống"),
+  phone: yup
+    .string()
+    .required("Số điện thoại không được để trống")
+    .matches(/^\d{10,12}$/, "Số điện thoại không hợp lệ"),
+});
+const AddressForm = ({ nextStep, initialValues, setInitialValues }) => {
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      console.log("values: ", values);
+      setInitialValues(values);
+      nextStep();
+    },
   });
-  const getUserDetail = async () => {
-    try {
-      const { status, data } = await userApi.getUserDetail();
-      if (status === HTTP_STATUS.OK) {
-        const userInfor = {
-          fullName: data?.data?.fullName,
-          email: data?.data?.email,
-          address: data?.data?.address,
-          phone: data?.data?.phone,
-        };
-        setInitialValues(userInfor);
-      } else {
-        openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
-      }
-    } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
-    }
-  };
-
-  useEffect(() => {
-    getUserDetail();
-  }, []);
 
   return (
     <>
       <Typography variant="h6" gutterBottom>
         Địa chỉ giao hàng
       </Typography>
-      <FormProvider {...methods}>
-        <form
-          onSubmit={methods.handleSubmit((data) =>
-            test({
-              ...data,
-            })
-          )}
-        >
-          <Grid container spacing={3}>
-            <FormInput
-              required
-              name="fullName"
-              label="Tên đầy đủ"
-              defaultValue={initialValues.fullName}
-            />
-            <FormInput
-              required
-              name="address"
-              label="Địa chỉ"
-              defaultValue={initialValues.address}
-            />
-            <FormInput
-              required
-              name="email"
-              label="Email"
-              defaultValue={initialValues.email}
-            />
-            <FormInput
-              required
-              name="phone"
-              label="Số điện thoại"
-              defaultValue={initialValues.phone}
-            />
-          </Grid>
-          <br />
+      <Box component="form" noValidate sx={{ mt: 1 }}>
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            id="fullName"
+            name="fullName"
+            label="Tên đầy đủ"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            {...formik.getFieldProps("fullName")}
+            error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+            helperText={formik.touched.fullName && formik.errors.fullName}
+          />
+          <TextField
+            id="email"
+            name="email"
+            label="Email"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            {...formik.getFieldProps("email")}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            id="address"
+            name="address"
+            label="Địa chỉ"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            {...formik.getFieldProps("address")}
+            error={formik.touched.address && Boolean(formik.errors.address)}
+            helperText={formik.touched.address && formik.errors.address}
+          />
+          <TextField
+            id="phone"
+            name="phone"
+            label="Số điện thoại"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            {...formik.getFieldProps("phone")}
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            helperText={formik.touched.phone && formik.errors.phone}
+          />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button component={Link} variant="outlined" to="/cart">
               Quay lại giỏ hàng
@@ -88,7 +90,8 @@ const AddressForm = ({ checkoutToken, test }) => {
             </Button>
           </div>
         </form>
-      </FormProvider>
+      </Box>
+      <br />
     </>
   );
 };

@@ -44,7 +44,7 @@ const OrderDetail = () => {
       openSnackbar(SNACKBAR.ERROR, "Get order detail failed");
     }
   };
-  console.log("order detail : ", orderDetail);
+
   useEffect(() => {
     fetchOrders();
   }, []);
@@ -53,6 +53,7 @@ const OrderDetail = () => {
     { field: "title", headerName: "Title", flex: 0.5 },
     { field: "author", headerName: "Author", flex: 0.5 },
     { field: "category", headerName: "Category", flex: 0.3 },
+    { field: "imageBase64Src", headerName: "Image", flex: 0.3 },
     { field: "importingPrice", headerName: "Importing price", flex: 0.5 },
     { field: "sellingPrice", headerName: "Selling price", flex: 0.3 },
     { field: "quantity", headerName: "Quantity", flex: 0.3 },

@@ -16,6 +16,7 @@ const validationSchema = yup.object().shape({
     .string()
     .email("Email sai định dạng")
     .required("Email không được để trống"),
+  phone: yup.string().matches(/^\d{10,12}$/, "Số điện thoại không hợp lệ"),
 });
 const UserProfile = () => {
   const { openSnackbar } = useSnackbar();

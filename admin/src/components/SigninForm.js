@@ -37,17 +37,25 @@ const SigninForm = () => {
       if (data.message === "authentication_fail") {
       } else {
         openSnackbar(SNACKBAR.SUCCESS, "Đăng nhập thành công");
-        auth.signin(
-          {
-            name: data.data.fullName,
-            email: values.email,
-            id: data.data.id,
-          },
-          data.data.accessToken,
-          () => {
-            window.location.href = "/books";
-          }
-        );
+        if (data?.data?.role === "ROLE_ADMIN") {
+          auth.signin(
+            {
+              name: data.data.fullName,
+              email: values.email,
+              id: data.data.id,
+              role: data.data.role,
+            },
+            data.data.accessToken,
+            () => {
+              window.location.href = "/books";
+            }
+          );
+        } else {
+          openSnackbar(
+            SNACKBAR.ERROR,
+            "Tài khoản không có quyền truy cập vào trang web"
+          );
+        }
       }
     } else {
       openSnackbar(SNACKBAR.ERROR, "Email hoặc mật khẩu không đúng");
@@ -122,7 +130,6 @@ const SigninForm = () => {
           >
             Đăng nhập
           </Button>
-          <Copyright sx={{ mt: 5 }} />
         </Box>
       </Box>
     </Grid>

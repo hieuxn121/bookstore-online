@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import { getData } from "../../utils/localStorage";
 import { useSnackbar } from "../../contexts";
 import { SNACKBAR } from "../../constants";
-import { MoreHorizSharp } from "@mui/icons-material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useNavigate } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
@@ -136,17 +135,15 @@ const Orders = () => {
       flex: 0.5,
       renderCell: ({ row: { orderId } }) => {
         return (
-          <>
-            <Box height="55%" m="0 auto" borderRadius="4px">
-              <Button
-                onClick={() => {
-                  navigate(`/orders/${orderId}`);
-                }}
-              >
-                <ExitToAppIcon />
-              </Button>
-            </Box>
-          </>
+          <Box height="55%" m="0" display="flex" justifyContent="flex-start">
+            <Button
+              onClick={() => {
+                navigate(`/orders/${orderId}`);
+              }}
+            >
+              <ExitToAppIcon />
+            </Button>
+          </Box>
         );
       },
     },

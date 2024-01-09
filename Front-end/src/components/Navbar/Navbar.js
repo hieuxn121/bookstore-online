@@ -10,6 +10,7 @@ import {
 import { ShoppingCart } from "@material-ui/icons";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ViewListIcon from "@material-ui/icons/ViewList";
 import { Link } from "react-router-dom";
 import logo from "../../assets/circles.png";
 import useStyles from "./styles";
@@ -93,10 +94,20 @@ const Navbar = ({ totalItems }) => {
                   <MenuItem onClick={handleClose}>
                     <Badge
                       color="secondary"
+                      onClick={() => history.push("/orders-history")}
+                    >
+                      <ViewListIcon />
+                      <h5>Lịch sử đơn hàng</h5>
+                    </Badge>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Badge
+                      color="secondary"
                       onClick={() => {
                         delData("token");
                         delData("user");
-                        window.location.reload();
+                        delData("isLogedIn");
+                        window.location.href = "/";
                       }}
                     >
                       <ExitToAppIcon />

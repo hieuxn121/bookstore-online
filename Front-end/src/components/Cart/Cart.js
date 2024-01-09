@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CartItem from "./CartItem/CartItem";
 import useStyles from "./styles";
 import { getData } from "../../utils/localStorage";
-import { userApi, cartApi } from "../../apis";
+import { cartApi } from "../../apis";
 import { useSnackbar } from "../../contexts";
 import { HTTP_STATUS, SNACKBAR } from "../../constants";
 import { useHistory } from "react-router-dom";

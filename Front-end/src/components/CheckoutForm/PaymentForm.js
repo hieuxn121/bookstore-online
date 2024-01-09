@@ -10,6 +10,7 @@ import { useSnackbar } from "../../contexts";
 import { HTTP_STATUS, SNACKBAR } from "../../constants";
 import { getData } from "../../utils/localStorage";
 import Review from "./Review";
+import { useHistory } from "react-router-dom";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -19,7 +20,9 @@ const PaymentForm = ({
   backStep,
   shippingData,
   onCaptureCheckout,
+  initialValues,
 }) => {
+  const history = useHistory();
   const { openSnackbar } = useSnackbar();
   const token = getData("token");
   const [cart, setCart] = useState({
@@ -112,7 +115,7 @@ const PaymentForm = ({
 
   const handleCreateOrder = async () => {
     const payload = {
-      ...shippingData,
+      ...initialValues,
     };
     const formData = new FormData();
     Object.keys(payload).forEach((key) => {
@@ -129,6 +132,7 @@ const PaymentForm = ({
         },
       });
       openSnackbar(SNACKBAR.SUCCESS, "Tạo đơn hàng thành công");
+      window.location.href = "/";
     } catch (error) {
       openSnackbar(SNACKBAR.ERROR, "Tạo đơn hàng thất bại");
     }
@@ -138,14 +142,10 @@ const PaymentForm = ({
     <>
       <Review checkoutToken={checkoutToken} cart={cart} />
       <Divider />
-      {/* <Typography variant="h6" gutterBottom style={{ margin: "20px 0" }}>
-        Payment method
-      </Typography> */}
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
             <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
-              {/* <CardElement /> */}
               <br /> <br />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Button variant="outlined" onClick={backStep}>
@@ -158,7 +158,6 @@ const PaymentForm = ({
                   style={{ backgroundColor: "#1C2331", color: "#FFFF" }}
                   onClick={handleCreateOrder}
                 >
-                  {/* Pay {cart?.subTotal} */}
                   Đặt hàng
                 </Button>
               </div>

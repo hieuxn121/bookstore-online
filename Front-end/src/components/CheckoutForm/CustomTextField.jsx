@@ -15,7 +15,6 @@ function FormInput({ name, label, required, defaultValue }) {
         label={label}
         fullWidth
         required={required}
-        disabled={true} 
         error={isError}
         defaultValue={defaultValue}
       />}

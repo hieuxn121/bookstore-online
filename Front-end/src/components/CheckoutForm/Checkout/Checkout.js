@@ -14,22 +14,50 @@ import { Link } from "react-router-dom";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
 import useStyles from "./styles";
+import { userApi } from "../../../apis";
+import { useSnackbar } from "../../../contexts";
+import { HTTP_STATUS, SNACKBAR } from "../../../constants";
 
 const steps = ["Địa chỉ giao hàng", "Chi tiết đơn hàng"];
 
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const { openSnackbar } = useSnackbar();
   const [activeStep, setActiveStep] = useState(0);
   const [shippingData, setShippingData] = useState({});
   const classes = useStyles();
+  const [initialValues, setInitialValues] = useState({
+    fullName: "",
+    email: "",
+    address: "",
+    phone: "",
+  });
+
+  const getUserDetail = async () => {
+    try {
+      const { status, data } = await userApi.getUserDetail();
+      if (status === HTTP_STATUS.OK) {
+        const userInfor = {
+          fullName: data?.data?.fullName,
+          email: data?.data?.email,
+          address: data?.data?.address,
+          phone: data?.data?.phone,
+        };
+        setInitialValues(userInfor);
+      } else {
+        openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
+      }
+    } catch (error) {
+      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
+    }
+  };
+
+  useEffect(() => {
+    getUserDetail();
+  }, []);
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
-  const test = (data) => {
-    setShippingData(data);
-    nextStep();
-  };
 
   let Confirmation = () =>
     order.customer ? (
@@ -70,13 +98,14 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const Form = () =>
     activeStep === 0 ? (
       <AddressForm
+        initialValues={initialValues}
+        setInitialValues={setInitialValues}
         checkoutToken={checkoutToken}
         nextStep={nextStep}
-        setShippingData={setShippingData}
-        test={test}
       />
     ) : (
       <PaymentForm
+        initialValues={initialValues}
         checkoutToken={checkoutToken}
         nextStep={nextStep}
         backStep={backStep}
