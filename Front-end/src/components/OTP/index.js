@@ -35,10 +35,10 @@ const OTPform = () => {
       });
       if (status === HTTP_STATUS.OK && data?.message === "success") {
         window.location.href = "/login";
-        openSnackbar(SNACKBAR.SUCCESS, "Register successfully");
+        openSnackbar(SNACKBAR.SUCCESS, "Đăng kí tài khoản thành công");
       } else {
         setErrors(data?.message);
-        openSnackbar(SNACKBAR.ERROR, "Try another email");
+        openSnackbar(SNACKBAR.ERROR, data?.message);
       }
     },
   });

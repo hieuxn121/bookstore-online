@@ -71,7 +71,7 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
             handleRemoveFromCart(item.id || item.bookId, item.cartItemId)
           }
         >
-          Remove
+          Xóa
         </Button>
       </CardActions>
     </Card>

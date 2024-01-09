@@ -50,7 +50,7 @@ const Navbar = ({ totalItems }) => {
               height="50px"
               className={classes.image}
             />
-            <strong>BooK-IT</strong>
+            <strong>Nta-bookstore</strong>
           </Typography>
 
           <div className={classes.grow} />
@@ -87,7 +87,7 @@ const Navbar = ({ totalItems }) => {
                       onClick={() => history.push("/user-profile")}
                     >
                       <PersonIcon />
-                      <h5>Profile</h5>
+                      <h5>Hồ sơ</h5>
                     </Badge>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
@@ -100,7 +100,7 @@ const Navbar = ({ totalItems }) => {
                       }}
                     >
                       <ExitToAppIcon />
-                      <h5>Logout</h5>
+                      <h5>Đăng xuất</h5>
                     </Badge>
                   </MenuItem>
                 </Menu>

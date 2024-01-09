@@ -26,22 +26,22 @@ const Category = () => {
   const newCategories = categoriesConverted.map((ct, index) => {
     return {
       name: ct.value,
-      description: "",
+      key: ct.key,
       createdAt: "2023-12-20",
       _id: ct.key,
     };
   });
 
   const columns = [
-    { field: "name", headerName: "Name", flex: 1 },
+    { field: "name", headerName: "Tên", flex: 1 },
     {
-      field: "description",
-      headerName: "Description",
+      field: "key",
+      headerName: "Key",
       flex: 1,
     },
     {
       field: "createdAt",
-      headerName: "Created At",
+      headerName: "Thời gian tạo",
       flex: 1,
       renderCell: ({ row: { createdAt } }) => {
         return moment(createdAt).utc().format("YYYY-MM-DD");

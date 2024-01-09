@@ -136,46 +136,6 @@ export const deleteBook = createAsyncThunk(
     } catch (error) {
       dispatch(logInsert({ name: "deleteBook", status: "failed" }));
       return rejectWithValue(error.data.message);
-      // if (error.response && error.response.data.message) {
-      //     return rejectWithValue(error.response.data.message)
-      //   } else {
-      //     return rejectWithValue(error.message)
-      //   }
-    }
-  }
-);
-
-export const searchBooks = createAsyncThunk(
-  "books/searchBooks",
-  async (query, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      const res = await fetch(
-        `http://localhost:8000/books/search?q=${query.q}`
-      );
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const filterBooks = createAsyncThunk(
-  "books/filterBooks",
-  async (query, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      let url = `http://localhost:8000/books/filter?`;
-      Object.keys(query).forEach((key) => {
-        url += `${key}=${query[key]}&`;
-      });
-      const res = await fetch(url);
-      //   const res = await fetch(`http://localhost:8000/books/filter?category=${query.category}&price_min=${query.price_min}&price_max=${query.price_max}`);
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
     }
   }
 );
@@ -217,36 +177,6 @@ const bookSlice = createSlice({
     [getBooks.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload.message;
-    },
-
-    //search books
-
-    [searchBooks.pending]: (state, action) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [searchBooks.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.books = action.payload;
-    },
-    [searchBooks.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-
-    //filter books
-
-    [filterBooks.pending]: (state, action) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [filterBooks.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.books = action.payload;
-    },
-    [filterBooks.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
     },
 
     //insert book

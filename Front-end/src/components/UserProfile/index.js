@@ -11,11 +11,11 @@ import { HTTP_STATUS, SNACKBAR } from "../../constants";
 import { getData } from "../../utils/localStorage";
 
 const validationSchema = yup.object().shape({
-  fullName: yup.string().required("fullName is required"),
+  fullName: yup.string().required("Tên người dùng không được để trống"),
   email: yup
     .string()
-    .email("Invalid email format")
-    .required("Email is required"),
+    .email("Email sai định dạng")
+    .required("Email không được để trống"),
 });
 const UserProfile = () => {
   const { openSnackbar } = useSnackbar();
@@ -36,10 +36,10 @@ const UserProfile = () => {
         };
         setInitialValues(userInfor);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Get user detail failed");
+        openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Get user detail failed");
+      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
     }
   };
 
@@ -59,12 +59,15 @@ const UserProfile = () => {
         },
       });
       if (res.status >= 400) {
-        openSnackbar(SNACKBAR.ERROR, "Update user profile failed");
+        openSnackbar(SNACKBAR.ERROR, "Cập nhật thông tin người dùng thất bại");
       } else {
-        openSnackbar(SNACKBAR.SUCCESS, "Update user profile successfully");
+        openSnackbar(
+          SNACKBAR.SUCCESS,
+          "Cập nhật thông tin người dùng thành công"
+        );
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Update user profile failed");
+      openSnackbar(SNACKBAR.ERROR, "Cập nhật thông tin người dùng thất bại");
     }
   };
 
@@ -73,10 +76,10 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <Container>
+    <Container style={{ marginBottom: "50px" }}>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant="h5" gutterBottom>
-        <b>User profile</b>
+        <b>Thông tin khách hàng</b>
       </Typography>
       <hr />
       <Grid item xs={12} sm={8} md={5} elevation={6} square>
@@ -99,7 +102,7 @@ const UserProfile = () => {
                     <TextField
                       id="fullName"
                       name="fullName"
-                      label="Full name"
+                      label="Tên đầy đủ"
                       variant="outlined"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -125,7 +128,7 @@ const UserProfile = () => {
                     <TextField
                       id="address"
                       name="address"
-                      label="Address"
+                      label="Địa chỉ"
                       variant="outlined"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -138,7 +141,7 @@ const UserProfile = () => {
                     <TextField
                       id="phone"
                       name="phone"
-                      label="Phone"
+                      label="Số điện thoại"
                       variant="outlined"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -154,7 +157,7 @@ const UserProfile = () => {
                       color="primary"
                       fullWidth
                     >
-                      Update profile
+                      Cập nhật thông tin
                     </Button>
                   </Form>
                 )}

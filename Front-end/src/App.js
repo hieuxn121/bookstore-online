@@ -15,13 +15,31 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { AuthProvider, SnackbarProvider, useSnackbar } from "./contexts";
+import { Snackbar, Alert } from "@mui/material";
+import { AuthProvider, SnackbarProvider } from "./contexts";
 import { getData } from "./utils/localStorage";
 import { bookApi } from "./apis";
 import { HTTP_STATUS, SNACKBAR } from "./constants";
 import "./global.css";
+
+const MuiAlert = React.forwardRef(function MuiAlert(props, ref) {
+  return <Alert elevation={3} ref={ref} variant="filled" {...props} />;
+});
+
 const App = () => {
-  // const { openSnackbar } = useSnackbar();
+  const [open, setOpen] = React.useState(false);
+  const [severity, setSeverity] = React.useState("info");
+  const [msg, setMsg] = React.useState("");
+  const openSnackbar = (severity, msg) => {
+    setSeverity(severity);
+    setMsg(msg);
+    setOpen(true);
+  };
+  const handleClose = (e, r) => {
+    if (r === "clickaway") return;
+    setOpen(false);
+  };
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({
@@ -44,10 +62,10 @@ const App = () => {
       if (status === HTTP_STATUS.OK) {
         setProducts(data?.data?.content);
       } else {
-        // openSnackbar(SNACKBAR.ERROR, "Get list books failed");
+        openSnackbar(SNACKBAR.ERROR, "Lấy danh sách sách thất bại");
       }
     } catch (error) {
-      // openSnackbar(SNACKBAR.ERROR, "Get list books failed");
+      openSnackbar(SNACKBAR.ERROR, "Lấy danh sách sách thất bại");
     }
   };
 
@@ -65,7 +83,7 @@ const App = () => {
         setCategories(categoriesConverted);
       }
     } catch (error) {
-      // openSnackbar(SNACKBAR.ERROR, "Get list categories failed");
+      openSnackbar(SNACKBAR.ERROR, "Lấy danh mục sách thất bại");
     }
   };
 
@@ -112,8 +130,9 @@ const App = () => {
             Cookie: `ms2a=${token}`,
           },
         });
+        openSnackbar(SNACKBAR.SUCCESS, "Thêm sách vào giỏ hàng thành công");
       } catch (error) {
-        // openSnackbar(SNACKBAR.ERROR, "Create cart failed");
+        openSnackbar(SNACKBAR.ERROR, "Thêm sách vào giỏ hàng thất bại");
       }
     } else {
       try {
@@ -125,8 +144,9 @@ const App = () => {
             Cookie: `ms2a=${token}`,
           },
         });
+        openSnackbar(SNACKBAR.SUCCESS, "Xóa sách khỏi giỏ hàng thành công");
       } catch (error) {
-        // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
+        openSnackbar(SNACKBAR.ERROR, "Xóa sách khỏi giỏ hàng thất bại");
       }
     }
   };
@@ -178,8 +198,9 @@ const App = () => {
             Cookie: `ms2a=${token}`,
           },
         });
+        openSnackbar(SNACKBAR.SUCCESS, "Cập nhật giỏ hàng thành công");
       } catch (error) {
-        // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
+        openSnackbar(SNACKBAR.ERROR, "Cập nhật giỏ hàng thất bại");
       }
     } else {
       try {
@@ -191,8 +212,9 @@ const App = () => {
             Cookie: `ms2a=${token}`,
           },
         });
+        openSnackbar(SNACKBAR.SUCCESS, "Xóa sách khỏi giỏ hàng thành công");
       } catch (error) {
-        // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
+        openSnackbar(SNACKBAR.ERROR, "Xóa sách khỏi giỏ hàng thất bại");
       }
     }
   };
@@ -227,8 +249,9 @@ const App = () => {
           Cookie: `ms2a=${token}`,
         },
       });
+      openSnackbar(SNACKBAR.SUCCESS, "Xóa sách khỏi đăng hàng thành công");
     } catch (error) {
-      // openSnackbar(SNACKBAR.ERROR, "Update cart failed");
+      openSnackbar(SNACKBAR.ERROR, "Xóa sách khỏi đăng hàng thất bại");
     }
   };
 
@@ -241,8 +264,9 @@ const App = () => {
           Cookie: `ms2a=${token}`,
         },
       });
+      openSnackbar(SNACKBAR.SUCCESS, "Xóa giỏ hàng thành công");
     } catch (error) {
-      // openSnackbar(SNACKBAR.ERROR, "Delete cart failed");
+      openSnackbar(SNACKBAR.ERROR, "Xóa giỏ hàng thất bại");
     }
     setCart({
       id: null,
@@ -364,6 +388,15 @@ const App = () => {
           </Router>
         </SnackbarProvider>
       </AuthProvider>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <MuiAlert
+          onClose={handleClose}
+          severity={severity}
+          sx={{ width: "100%" }}
+        >
+          {msg}
+        </MuiAlert>
+      </Snackbar>
       <Footer />
     </div>
   );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
-import Dashboard from "./scenes/dashboard";
+// import Dashboard from "./scenes/dashboard";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import SignInSide from "./components/SignInSide";
@@ -34,11 +34,11 @@ const App = () => {
                   ) : (
                     <Route path="/login" element={<Navigate to="/" />} />
                   )}
-                  {isLogedIn ? (
+                  {/* {isLogedIn ? (
                     <Route path="/" element={<Dashboard />} />
                   ) : (
                     <Route path="*" element={<Navigate to="/login" />} />
-                  )}
+                  )} */}
                   {isLogedIn ? (
                     <Route path="/users" element={<User />} />
                   ) : (

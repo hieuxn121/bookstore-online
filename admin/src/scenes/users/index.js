@@ -19,7 +19,7 @@ const User = () => {
   const columns = [
     {
       field: "fullName",
-      headerName: "Full name",
+      headerName: "Tên đầy đủ",
       flex: 1,
     },
     {
@@ -29,19 +29,19 @@ const User = () => {
     },
     {
       field: "phone",
-      headerName: "Phone Number",
+      headerName: "Số điện thoại",
       flex: 1,
     },
     {
       field: "address",
-      headerName: "Address",
+      headerName: "Địa chỉ",
       flex: 1,
     },
   ];
 
   return (
     <Box mx="20px">
-      <Header title="USERS" subtitle="Managing the users " />
+      <Header title="Người dùng" subtitle="Quản lí người dùng" />
       <Box
         m="20px 0 0 0"
         height="72vh"

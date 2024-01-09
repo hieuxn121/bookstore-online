@@ -101,12 +101,12 @@ const ModalUpdateBook = ({ open, handleClose }) => {
       const data = await res.json();
       if (data.statusCode === "00000") {
         dispatch(getBooks());
-        openSnackbar(SNACKBAR.SUCCESS, "Update book successfully");
+        openSnackbar(SNACKBAR.SUCCESS, "Cập nhật sách thành công");
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Update book failed");
+        openSnackbar(SNACKBAR.ERROR, "Cập nhật sách thất bại");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Update book failed");
+      openSnackbar(SNACKBAR.ERROR, "Cập nhật sách thất bại");
     }
     handleClose();
     setCategorySelected(null);
@@ -138,7 +138,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }} />
 
             <Typography component="h1" variant="h5">
-              Update Book
+              Cập nhật sách
             </Typography>
           </Box>
 
@@ -163,7 +163,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="Title"
+                    label="Tên sách"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.title}
@@ -176,7 +176,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="Author"
+                    label="Tác giả"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.author}
@@ -189,7 +189,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="Description"
+                    label="Tóm tắt"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.description}
@@ -227,7 +227,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                         color="textSecondary"
                         style={{ marginTop: "10px" }}
                       >
-                        Selected file: {selectedFile.name}
+                        Chọn ảnh: {selectedFile.name}
                       </Typography>
                     )}
                   </div>
@@ -254,7 +254,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Sold quantity"
+                    label="Số lượng đã bán"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.soldQuantity}
@@ -265,7 +265,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Remaining quantity"
+                    label="Số lượng còn lại"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.remainingQuantity}
@@ -276,7 +276,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Importing price"
+                    label="Giá nhập"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.importingPrice}
@@ -287,7 +287,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Selling price"
+                    label="Giá bán"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.sellingPrice}
@@ -297,7 +297,7 @@ const ModalUpdateBook = ({ open, handleClose }) => {
                 </Box>
                 <Box display="flex" justifyContent="end" mt="20px">
                   <Button type="submit" color="secondary" variant="contained">
-                    update Book
+                    Cập nhật
                   </Button>
                 </Box>
               </Form>

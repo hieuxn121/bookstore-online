@@ -13,19 +13,19 @@ import { useAuth, useSnackbar } from "../../contexts";
 import { HTTP_STATUS, SNACKBAR } from "../../constants";
 
 const validationSchema = yup.object({
-  fullname: yup.string().required("fullname is required"),
+  fullname: yup.string().required("Tên người dùng không được để trống"),
   email: yup
     .string()
-    .email("Invalid email format")
-    .required("Email is required"),
+    .email("Email sai định dạng")
+    .required("Email không được để trống"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .min(6, "Mật khẩu phải lớn hơn 6 kí tự")
+    .required("Mật khẩu không được để trống"),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
-    .required("Confirm Password is required"),
+    .oneOf([yup.ref("password"), null], "Xác nhận lại mật khẩu không khớp")
+    .required("Xác nhận mật khẩu không được để trống"),
 });
 
 const RegisterForm = () => {
@@ -63,10 +63,10 @@ const RegisterForm = () => {
             },
           });
         } else if (status === HTTP_STATUS.BAD_REQUEST) {
-          openSnackbar(SNACKBAR.ERROR, "Try another email");
+          openSnackbar(SNACKBAR.ERROR, "Thử tài khoản email khác");
         }
       } catch (error) {
-        openSnackbar(SNACKBAR.ERROR, "Try another email");
+        openSnackbar(SNACKBAR.ERROR, "Thử tài khoản email khác");
       }
     },
   });
@@ -83,14 +83,14 @@ const RegisterForm = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Register user
+          Đăng kí tài khoản
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
           <form onSubmit={formik.handleSubmit}>
             <TextField
               id="fullname"
               name="fullname"
-              label="Full name"
+              label="Tên đầy đủ"
               variant="outlined"
               fullWidth
               margin="normal"
@@ -140,7 +140,7 @@ const RegisterForm = () => {
             />
 
             <Button type="submit" variant="contained" color="primary" fullWidth>
-              Sign Up
+              Đăng kí
             </Button>
           </form>
         </Box>

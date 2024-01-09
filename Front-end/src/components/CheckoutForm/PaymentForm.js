@@ -128,9 +128,9 @@ const PaymentForm = ({
           Cookie: `ms2a=${token}`,
         },
       });
-      openSnackbar(SNACKBAR.SUCCESS, "Create order successfully");
+      openSnackbar(SNACKBAR.SUCCESS, "Tạo đơn hàng thành công");
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Create order failed");
+      openSnackbar(SNACKBAR.ERROR, "Tạo đơn hàng thất bại");
     }
   };
 
@@ -149,7 +149,7 @@ const PaymentForm = ({
               <br /> <br />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Button variant="outlined" onClick={backStep}>
-                  Back
+                  Quay lại
                 </Button>
                 <Button
                   type="submit"
@@ -159,7 +159,7 @@ const PaymentForm = ({
                   onClick={handleCreateOrder}
                 >
                   {/* Pay {cart?.subTotal} */}
-                  Order
+                  Đặt hàng
                 </Button>
               </div>
             </form>

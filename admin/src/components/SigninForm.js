@@ -36,7 +36,7 @@ const SigninForm = () => {
     if (status === HTTP_STATUS.OK) {
       if (data.message === "authentication_fail") {
       } else {
-        openSnackbar(SNACKBAR.SUCCESS, "Login successfully");
+        openSnackbar(SNACKBAR.SUCCESS, "Đăng nhập thành công");
         auth.signin(
           {
             name: data.data.fullName,
@@ -45,12 +45,12 @@ const SigninForm = () => {
           },
           data.data.accessToken,
           () => {
-            window.location.href = "/";
+            window.location.href = "/books";
           }
         );
       }
     } else {
-      openSnackbar(SNACKBAR.ERROR, "Email or password is incorrect");
+      openSnackbar(SNACKBAR.ERROR, "Email hoặc mật khẩu không đúng");
     }
   };
 
@@ -78,7 +78,7 @@ const SigninForm = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Đăng nhập
         </Typography>
         <Box
           component="form"
@@ -93,7 +93,7 @@ const SigninForm = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
@@ -120,20 +120,8 @@ const SigninForm = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Đăng nhập
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
           <Copyright sx={{ mt: 5 }} />
         </Box>
       </Box>

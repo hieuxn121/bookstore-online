@@ -15,7 +15,7 @@ import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
 import useStyles from "./styles";
 
-const steps = ["Shipping address", "Payment details"];
+const steps = ["Địa chỉ giao hàng", "Chi tiết đơn hàng"];
 
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
@@ -61,7 +61,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         <Typography variant="h5">Error: {error}</Typography>
         <br />
         <Button component={Link} variant="outlined" type="button" to="/">
-          Back to home
+          Về trang chủ
         </Button>
       </>
     );
@@ -93,7 +93,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography variant="h4" align="center">
-            Checkout
+            Thanh toán
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (

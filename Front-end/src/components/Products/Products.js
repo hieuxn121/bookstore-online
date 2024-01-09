@@ -27,7 +27,7 @@ const Products = ({ products, setProducts, onAddToCart, categories }) => {
               <Input
                 className={classes.searchb}
                 type="text"
-                placeholder="Which book are you looking for?"
+                placeholder="Bạn đang tìm cuốn sách nào?"
                 onChange={async (event) => {
                   setSearchTerm(event.target.value);
                   const { status, data } = await bookApi.listbooks(
@@ -54,7 +54,7 @@ const Products = ({ products, setProducts, onAddToCart, categories }) => {
 
       {searchTerm === "" && (
         <>
-          <h3 className={classes.contentHeader}>FEATURED</h3>
+          <h3 className={classes.contentHeader}>Danh sách book</h3>
           <Grid
             className={classes.contentFeatured}
             container

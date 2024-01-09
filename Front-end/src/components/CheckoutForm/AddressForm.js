@@ -28,11 +28,10 @@ const AddressForm = ({ checkoutToken, test }) => {
         };
         setInitialValues(userInfor);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Get user detail failed");
+        openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
       }
     } catch (error) {
-      console.log("error: ", error);
-      openSnackbar(SNACKBAR.ERROR, "Get user detail failed");
+      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
     }
   };
 
@@ -43,7 +42,7 @@ const AddressForm = ({ checkoutToken, test }) => {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        Địa chỉ giao hàng
       </Typography>
       <FormProvider {...methods}>
         <form
@@ -57,13 +56,13 @@ const AddressForm = ({ checkoutToken, test }) => {
             <FormInput
               required
               name="fullName"
-              label="Full name"
+              label="Tên đầy đủ"
               defaultValue={initialValues.fullName}
             />
             <FormInput
               required
               name="address"
-              label="Address"
+              label="Địa chỉ"
               defaultValue={initialValues.address}
             />
             <FormInput
@@ -75,17 +74,17 @@ const AddressForm = ({ checkoutToken, test }) => {
             <FormInput
               required
               name="phone"
-              label="Phone"
+              label="Số điện thoại"
               defaultValue={initialValues.phone}
             />
           </Grid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button component={Link} variant="outlined" to="/cart">
-              Back to Cart
+              Quay lại giỏ hàng
             </Button>
             <Button type="submit" variant="contained" color="primary">
-              Next
+              Tiếp theo
             </Button>
           </div>
         </form>

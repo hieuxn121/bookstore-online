@@ -54,34 +54,34 @@ const Book = () => {
       const data = await res.json();
       if (data.statusCode === "00000") {
         dispatch(getBooks());
-        openSnackbar(SNACKBAR.SUCCESS, "Delete book successfully");
+        openSnackbar(SNACKBAR.SUCCESS, "Xóa sách thành công");
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Delete book failed");
+        openSnackbar(SNACKBAR.ERROR, "Xóa sách thất bại");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Delete book failed");
+      openSnackbar(SNACKBAR.ERROR, "Xóa sách thất bại");
     }
   };
 
   const columns = [
     {
       field: "title",
-      headerName: "Title",
+      headerName: "Tên sách",
       flex: 0.5,
     },
     {
       field: "author",
-      headerName: "Author",
+      headerName: "Tác giả",
       flex: 0.5,
     },
     {
       field: "description",
-      headerName: "Description",
+      headerName: "Tóm tắt",
       flex: 0.5,
     },
     {
       field: "imageBase64Src",
-      headerName: "Image",
+      headerName: "Ảnh bìa",
       flex: 0.3,
       renderCell: ({ row: { imageBase64Src } }) => {
         return (
@@ -96,32 +96,32 @@ const Book = () => {
     },
     {
       field: "category",
-      headerName: "Category",
+      headerName: "Danh mục sách",
       flex: 0.3,
     },
     {
       field: "soldQuantity",
-      headerName: "Sold Quantity",
+      headerName: "Số lượng đã bán",
       flex: 0.3,
     },
     {
       field: "remainingQuantity",
-      headerName: "Remain Quantity",
+      headerName: "Số lượng còn lại",
       flex: 0.3,
     },
     {
       field: "importingPrice",
-      headerName: "Imported Price",
+      headerName: "Giá nhập",
       flex: 0.3,
     },
     {
       field: "sellingPrice",
-      headerName: "Selling Price",
+      headerName: "Giá bán",
       flex: 0.3,
     },
     {
       field: "update",
-      headerName: "Update Book",
+      headerName: "Cập nhật sách",
       flex: 0.3,
       renderCell: ({ row: { id } }) => {
         return (
@@ -161,7 +161,7 @@ const Book = () => {
       />
       {book ? <ModalUpdateBook open={open} handleClose={handleClose} /> : <></>}
 
-      <Header title="Books" subtitle="Managing Books " />
+      <Header title="Đầu sách" subtitle="Quản lí đầu sách" />
       <Box
         m="20px 0 0 0"
         height="72vh"
@@ -205,7 +205,7 @@ const Book = () => {
             color="secondary"
             variant="contained"
           >
-            Add Book
+            Thêm sách
           </Button>
         </Box>
         <DataGrid

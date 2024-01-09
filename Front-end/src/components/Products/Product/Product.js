@@ -64,7 +64,7 @@ const Product = ({ product, onAddToCart, categories }) => {
           endIcon={<AddShoppingCart />}
           onClick={handleAddToCart}
         >
-          <b>ADD TO CART</b>
+          <b>Thêm vào giỏ hàng</b>
         </Button>
       </CardActions>
     </Card>

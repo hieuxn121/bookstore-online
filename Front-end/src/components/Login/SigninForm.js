@@ -15,12 +15,12 @@ import { HTTP_STATUS, SNACKBAR } from "../../constants";
 const validationSchema = yup.object({
   email: yup
     .string()
-    .email("Invalid email format")
-    .required("Email is required"),
+    .email("Email sai định dạng")
+    .required("Email không được để trống"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .min(6, "Mật khẩu phải lớn hơn 6 kí tự")
+    .required("Mật khẩu không được để trống"),
 });
 
 const SigninForm = () => {
@@ -39,9 +39,9 @@ const SigninForm = () => {
       const { status, data } = await userApi.login(values);
       if (status === HTTP_STATUS.OK) {
         if (data.message === "authentication_fail") {
-          setError("Invalid email or password !");
+          setError("Email hoặc password không đúng !");
         } else {
-          openSnackbar(SNACKBAR.SUCCESS, "Login successfully");
+          openSnackbar(SNACKBAR.SUCCESS, "Đăng nhập thành công");
           auth.signin(
             {
               name: data.data.fullName,
@@ -56,7 +56,7 @@ const SigninForm = () => {
           );
         }
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Email or password is incorrect");
+        openSnackbar(SNACKBAR.ERROR, "Email hoặc password không đúng");
       }
     },
   });
@@ -73,7 +73,7 @@ const SigninForm = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+          Đăng nhập
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
           <form onSubmit={formik.handleSubmit}>
@@ -102,18 +102,18 @@ const SigninForm = () => {
             />
             {error && <h7 style={{ color: "red" }}>{error}</h7>}
             <Button type="submit" variant="contained" color="primary" fullWidth>
-              Sign Up
+              Đăng nhập
             </Button>
           </form>
           <Grid container>
             <Grid item xs>
               <Link to="#" variant="body2">
-                Forgot password?
+                Quên mật khẩu ?
               </Link>
             </Grid>
             <Grid item>
               <Link to="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Chưa có tài khoản ? Đăng kí"}
               </Link>
             </Grid>
           </Grid>

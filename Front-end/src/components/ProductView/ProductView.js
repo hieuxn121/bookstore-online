@@ -45,7 +45,7 @@ const ProductView = () => {
             dangerouslySetInnerHTML={createMarkup(product.description)}
           />
           <Typography variant="h3" color="secondary" style={{ color: "red" }}>
-            Price: <b> {product.sellingPrice} </b>
+            Giá: <b> {product.sellingPrice} VND</b>
           </Typography>
           <br />
           <Grid container spacing={4}>
@@ -56,7 +56,7 @@ const ProductView = () => {
                 component={Link}
                 to="/"
               >
-                Continue Shopping
+                Tiếp tục mua sách
               </Button>
             </Grid>
           </Grid>

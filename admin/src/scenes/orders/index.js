@@ -54,10 +54,10 @@ const Orders = () => {
       if (data.statusCode === "00000") {
         setOrders(data?.data);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Get list orders failed");
+        openSnackbar(SNACKBAR.ERROR, "Lấy danh sách orders thât bại");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Get list orders failed");
+      openSnackbar(SNACKBAR.ERROR, "Lấy danh sách orders thât bại");
     }
   };
 
@@ -86,11 +86,11 @@ const Orders = () => {
         setUpdateStatus(true);
       } else {
         setUpdateStatus(false);
-        openSnackbar(SNACKBAR.ERROR, "Update order status failed");
+        openSnackbar(SNACKBAR.ERROR, "Cập nhật đơn hàng thất bại");
       }
     } catch (error) {
       setUpdateStatus(false);
-      openSnackbar(SNACKBAR.ERROR, "Get order status failed");
+      openSnackbar(SNACKBAR.ERROR, "Cập nhật đơn hàng thất bại");
     }
   };
 
@@ -99,14 +99,14 @@ const Orders = () => {
   }, [updateStatus]);
 
   const columns = [
-    { field: "fullName", headerName: "User name", flex: 0.5 },
+    { field: "fullName", headerName: "Tên khách hàng", flex: 0.5 },
     { field: "email", headerName: "Email", flex: 0.5 },
-    { field: "phone", headerName: "Phone", flex: 0.3 },
-    { field: "address", headerName: "Address", flex: 0.5 },
-    { field: "totalValue", headerName: "Total Value", flex: 0.3 },
+    { field: "phone", headerName: "Số điện thoại", flex: 0.3 },
+    { field: "address", headerName: "Địa chỉ", flex: 0.5 },
+    { field: "totalValue", headerName: "Tổng tiền", flex: 0.3 },
     {
       field: "orderStatus",
-      headerName: "Order status",
+      headerName: "Trạng thái đơn",
       flex: 0.3,
       renderCell: ({ row: { orderStatus, orderId } }) => {
         return (
@@ -128,11 +128,11 @@ const Orders = () => {
         );
       },
     },
-    { field: "createdAt", headerName: "Created at", flex: 0.3 },
-    { field: "modifiedAt", headerName: "Updated at", flex: 0.3 },
+    { field: "createdAt", headerName: "Thời gian tạo", flex: 0.3 },
+    { field: "modifiedAt", headerName: "Thời gian cập nhật", flex: 0.3 },
     {
       field: "update",
-      headerName: "View detail order",
+      headerName: "Xem chi tiết đơn",
       flex: 0.5,
       renderCell: ({ row: { orderId } }) => {
         return (
@@ -154,7 +154,7 @@ const Orders = () => {
 
   return (
     <Box m="20px">
-      <Header title="Orders" subtitle="List of orders " />
+      <Header title="Đơn hàng" subtitle="Danh sách đơn hàng" />
       <Box
         m="40px 0 0 0"
         height="72vh"

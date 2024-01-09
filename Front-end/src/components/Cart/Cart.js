@@ -23,10 +23,10 @@ const Cart = ({
   const token = getData("token");
   const renderEmptyCart = () => (
     <Typography variant="subtitle1">
-      You have no items in your shopping cart,
+      Bạn không có sách nào trong giỏ hàng,
       <Link className={classes.link} to="/">
         {" "}
-        start adding some
+        bắt đầu thêm
       </Link>
       !
     </Typography>
@@ -46,10 +46,10 @@ const Cart = ({
           openSnackbar(SNACKBAR.ERROR, data.message);
         }
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Check order failed");
+        openSnackbar(SNACKBAR.ERROR, "Kiểm tra điều kiện thanh toán lỗi");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Check order failed");
+      openSnackbar(SNACKBAR.ERROR, "Kiểm tra điều kiện thanh toán lỗi");
     }
   };
 
@@ -75,7 +75,7 @@ const Cart = ({
           }}
         >
           <Typography variant="h5">
-            Subtotal: <b>{cart.subTotal}</b>
+            Tổng tiền: <b>{cart.subTotal}</b>
           </Typography>
           {/* <Button
             style={{ marginLeft: "70px" }}
@@ -98,7 +98,7 @@ const Cart = ({
             color="secondary"
             onClick={handleEmptyCart}
           >
-            Empty cart
+            Xóa giỏ hàng
           </Button>
           <Button
             className={classes.checkoutButton}
@@ -107,7 +107,7 @@ const Cart = ({
             type="button"
             variant="contained"
           >
-            Checkout
+            Thanh toán
           </Button>
         </div>
       </div>
@@ -151,10 +151,10 @@ const Cart = ({
   }, []);
 
   return (
-    <Container>
+    <Container style={{ marginBottom: "177px" }}>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant="h5" gutterBottom>
-        <b>Your Shopping Cart</b>
+        <b>Giỏ hàng của bạn</b>
       </Typography>
       <hr />
       {!cart.lineItems.length ? renderEmptyCart() : renderCart()}

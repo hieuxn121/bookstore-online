@@ -82,12 +82,12 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
       const data = await res.json();
       if (data.statusCode === "00000") {
         dispatch(getBooks());
-        openSnackbar(SNACKBAR.SUCCESS, "Create book successfully");
+        openSnackbar(SNACKBAR.SUCCESS, "Tạo sách thành công");
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Create book failed");
+        openSnackbar(SNACKBAR.ERROR, "Tạo sách thất bại");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Create book failed");
+      openSnackbar(SNACKBAR.ERROR, "Tạo sách thất bại");
     }
     setOpenAdd(false);
   };
@@ -121,7 +121,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }} />
 
             <Typography component="h1" variant="h5">
-              Add Book
+              Thêm sách
             </Typography>
           </Box>
           <Formik
@@ -145,7 +145,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="Title"
+                    label="Tên sách"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.title}
@@ -158,7 +158,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="Author"
+                    label="Tác giả"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.author}
@@ -171,7 +171,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="Description"
+                    label="Tóm tắt"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.description}
@@ -209,7 +209,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                         color="textSecondary"
                         style={{ marginTop: "10px" }}
                       >
-                        Selected file: {selectedFile.name}
+                        Chọn ảnh: {selectedFile.name}
                       </Typography>
                     )}
                   </div>
@@ -217,7 +217,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     select
-                    label="Categories"
+                    label="Danh mục"
                     onChange={handleCategory}
                     value={CategorySelected}
                     name="category"
@@ -236,7 +236,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Sold quantity"
+                    label="Số lượng đã bán"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.soldQuantity}
@@ -247,7 +247,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Remaining quantity"
+                    label="Số lượng còn lại"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.remainingQuantity}
@@ -258,7 +258,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Importing price"
+                    label="Giá nhập"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.importingPrice}
@@ -269,7 +269,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                     fullWidth
                     variant="filled"
                     type="number"
-                    label="Selling price"
+                    label="Giá bán"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.sellingPrice}
@@ -279,7 +279,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
                 </Box>
                 <Box display="flex" justifyContent="end" mt="20px">
                   <Button type="submit" color="secondary" variant="contained">
-                    Add book
+                    Tạo mới
                   </Button>
                 </Box>
               </Form>
