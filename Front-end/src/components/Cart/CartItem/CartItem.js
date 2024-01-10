@@ -27,7 +27,7 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
       <CardContent className={classes.cardContent}>
         <Typography variant="h6">{item.title}</Typography>
         <Typography variant="h6" color="secondary">
-          {item.sellingPrice * item.quantity}
+          {item.sellingPrice * item.quantity} VND
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>

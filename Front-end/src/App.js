@@ -301,9 +301,42 @@ const App = () => {
     }
   };
 
+  const fetchCart = async () => {
+    try {
+      const res = await fetch("http://localhost:8889/api/shopping-cart-items", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Cookie: `ms2a=${token}`,
+        },
+      });
+      const data = await res.json();
+      if (data?.statusCode === "00000") {
+        const cartItems = data?.data;
+        let totalItems = 0;
+        let subTotal = 0;
+        cartItems.forEach((ct) => {
+          totalItems = totalItems + ct.quantity;
+          subTotal = subTotal + ct.quantity * ct.sellingPrice;
+        });
+        const cart = {
+          id: null,
+          lineItems: cartItems,
+          totalItems,
+          totalUniqueItems: cartItems?.length,
+          subTotal,
+        };
+        setCart(cart);
+      }
+    } catch (error) {
+      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin đơn hàng thất bại");
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
     fetchCategories();
+    fetchCart();
   }, []);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);

@@ -14,7 +14,7 @@ const Review = ({ cart }) => (
             secondary={`Số lượng: ${product.quantity}`}
           />
           <Typography variant="body2">
-            {product.quantity * product.sellingPrice}
+            {product.quantity * product.sellingPrice} VND
           </Typography>
         </ListItem>
       ))}

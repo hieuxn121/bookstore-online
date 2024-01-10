@@ -98,7 +98,7 @@ const SigninForm = () => {
             <TextField
               id="password"
               name="password"
-              label="Password"
+              label="Mật khẩu"
               type="password"
               variant="outlined"
               fullWidth
