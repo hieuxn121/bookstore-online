@@ -14,7 +14,6 @@ const baseRequest = async (method, url, sendData = {}) => {
       method,
       url,
       data: sendData,
-      timeout: 5000,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
