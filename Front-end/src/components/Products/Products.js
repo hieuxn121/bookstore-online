@@ -54,7 +54,7 @@ const Products = ({ products, setProducts, onAddToCart, categories }) => {
 
       {searchTerm === "" && (
         <>
-          <h3 className={classes.contentHeader}>Danh sách book</h3>
+          <h3 className={classes.contentHeader}>Đầu sách hiện có</h3>
           <Grid
             className={classes.contentFeatured}
             container

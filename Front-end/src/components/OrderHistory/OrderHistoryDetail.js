@@ -34,10 +34,13 @@ const OrderHistoryDetail = () => {
       if (data.statusCode === "00000") {
         setOrderDetail(data?.data);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Get order detail failed");
+        openSnackbar(
+          SNACKBAR.ERROR,
+          "Lấy danh sách chi tiết đơn hàng thất bại"
+        );
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Get order detail failed");
+      openSnackbar(SNACKBAR.ERROR, "Lấy danh sách chi tiết đơn hàng thất bại");
     }
   };
 
@@ -65,7 +68,7 @@ const OrderHistoryDetail = () => {
                   secondary={`Số lượng: ${product.quantity}`}
                 />
                 <Typography variant="body2">
-                  {product.quantity * product.sellingPrice}
+                  {product.quantity * product.sellingPrice} VND
                 </Typography>
               </ListItem>
             ))}

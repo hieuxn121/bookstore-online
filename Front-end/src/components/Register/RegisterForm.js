@@ -69,11 +69,9 @@ const RegisterForm = () => {
             });
           }
         } else if (status === HTTP_STATUS.BAD_REQUEST) {
-          console.log("error 1: ", error);
           openSnackbar(SNACKBAR.ERROR, "Thử tài khoản email khác");
         }
       } catch (error) {
-        console.log("error 2: ", error);
         openSnackbar(SNACKBAR.ERROR, "Thử tài khoản email khác");
       }
     },
@@ -120,7 +118,7 @@ const RegisterForm = () => {
             <TextField
               id="password"
               name="password"
-              label="Password"
+              label="Mật khẩu"
               type="password"
               variant="outlined"
               fullWidth
@@ -132,7 +130,7 @@ const RegisterForm = () => {
             <TextField
               id="confirmPassword"
               name="confirmPassword"
-              label="Confirm Password"
+              label="Xác nhận mật khẩu"
               type="password"
               variant="outlined"
               fullWidth

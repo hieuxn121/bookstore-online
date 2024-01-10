@@ -75,7 +75,7 @@ const Cart = ({
           }}
         >
           <Typography variant="h5">
-            Tổng tiền: <b>{cart.subTotal}</b>
+            Tổng tiền: <b>{cart.subTotal} VND</b>
           </Typography>
           {/* <Button
             style={{ marginLeft: "70px" }}
@@ -142,7 +142,7 @@ const Cart = ({
         setCart(cart);
       }
     } catch (error) {
-      console.log(error);
+      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin đơn hàng thất bại");
     }
   };
 
