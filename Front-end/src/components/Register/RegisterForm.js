@@ -69,9 +69,11 @@ const RegisterForm = () => {
             });
           }
         } else if (status === HTTP_STATUS.BAD_REQUEST) {
+          console.log("error 1: ", error);
           openSnackbar(SNACKBAR.ERROR, "Thử tài khoản email khác");
         }
       } catch (error) {
+        console.log("error 2: ", error);
         openSnackbar(SNACKBAR.ERROR, "Thử tài khoản email khác");
       }
     },
