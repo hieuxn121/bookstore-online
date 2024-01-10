@@ -61,6 +61,7 @@ const Orders = () => {
   };
 
   const handleChange = async (event, orderId) => {
+    setUpdateStatus(false);
     event.preventDefault();
     const payload = {
       status: event.target.value,
@@ -84,11 +85,9 @@ const Orders = () => {
       if (data.statusCode === "00000") {
         setUpdateStatus(true);
       } else {
-        setUpdateStatus(false);
         openSnackbar(SNACKBAR.ERROR, "Cập nhật đơn hàng thất bại");
       }
     } catch (error) {
-      setUpdateStatus(false);
       openSnackbar(SNACKBAR.ERROR, "Cập nhật đơn hàng thất bại");
     }
   };

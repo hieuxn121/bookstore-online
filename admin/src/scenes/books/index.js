@@ -56,10 +56,16 @@ const Book = () => {
         dispatch(getBooks());
         openSnackbar(SNACKBAR.SUCCESS, "Xóa sách thành công");
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Xóa sách thất bại");
+        openSnackbar(
+          SNACKBAR.ERROR,
+          "Xóa sách thất bại. Kiểm tra xem sách có trong đơn hàng hay không ?"
+        );
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Xóa sách thất bại");
+      openSnackbar(
+        SNACKBAR.ERROR,
+        "Xóa sách thất bại. Kiểm tra xem sách có trong đơn hàng hay không ?"
+      );
     }
   };
 

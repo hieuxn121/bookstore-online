@@ -50,13 +50,12 @@ const OrderDetail = () => {
   }, []);
 
   const columns = [
-    { field: "title", headerName: "Title", flex: 0.5 },
-    { field: "author", headerName: "Author", flex: 0.5 },
-    { field: "category", headerName: "Category", flex: 0.3 },
-    { field: "imageBase64Src", headerName: "Image", flex: 0.3 },
-    { field: "importingPrice", headerName: "Importing price", flex: 0.5 },
-    { field: "sellingPrice", headerName: "Selling price", flex: 0.3 },
-    { field: "quantity", headerName: "Quantity", flex: 0.3 },
+    { field: "title", headerName: "Tên sách", flex: 0.5 },
+    { field: "author", headerName: "Tác giả", flex: 0.5 },
+    { field: "category", headerName: "Danh mục", flex: 0.3 },
+    { field: "importingPrice", headerName: "Giá nhập", flex: 0.5 },
+    { field: "sellingPrice", headerName: "Giá bán", flex: 0.3 },
+    { field: "quantity", headerName: "Số lượng đặt", flex: 0.3 },
   ];
 
   return (
@@ -65,7 +64,7 @@ const OrderDetail = () => {
         <Typography color={colors.greenAccent[500]}>
           <ArrowBackIcon />
         </Typography>
-        <Typography color={colors.greenAccent[500]}>Go back</Typography>
+        <Typography color={colors.greenAccent[500]}>Quay lại</Typography>
       </Button>
       <Header
         title="Order Detail"
