@@ -23,7 +23,7 @@ const OrderDetail = () => {
   const [author, setAuthor] = useState({});
   const fetchOrders = async () => {
     try {
-      const res = await fetch(`http://localhost:8889/api/orders/${id}`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/orders/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

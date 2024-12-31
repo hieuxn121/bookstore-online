@@ -18,11 +18,12 @@ import "mdbreact/dist/css/mdb.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Snackbar, Alert } from "@mui/material";
 import { AuthProvider, SnackbarProvider } from "./contexts";
-import { getData } from "./utils/localStorage";
+import { delData, getData } from "./utils/localStorage";
 import { bookApi } from "./apis";
 import { HTTP_STATUS, SNACKBAR } from "./constants";
 import "./global.css";
 import OrderHistoryDetail from "./components/OrderHistory/OrderHistoryDetail";
+import { useHistory } from "react-router-dom";
 
 const MuiAlert = React.forwardRef(function MuiAlert(props, ref) {
   return <Alert elevation={3} ref={ref} variant="filled" {...props} />;
@@ -32,6 +33,8 @@ const App = () => {
   const [open, setOpen] = React.useState(false);
   const [severity, setSeverity] = React.useState("info");
   const [msg, setMsg] = React.useState("");
+  const history = useHistory();
+
   const openSnackbar = (severity, msg) => {
     setSeverity(severity);
     setMsg(msg);
@@ -73,7 +76,7 @@ const App = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://localhost:8889/api/books/categories");
+      const res = await fetch("http://14.225.207.183:8888/api/books/categories");
       const data = await res.json();
       if (data?.statusCode === "00000") {
         const categories = data?.data;
@@ -124,7 +127,7 @@ const App = () => {
 
     if (quantity !== 0) {
       try {
-        await fetch(`http://localhost:8889/api/shopping-cart-items`, {
+        await fetch(`http://14.225.207.183:8888/api/shopping-cart-items`, {
           method: "POST",
           body: formData,
           headers: {
@@ -138,7 +141,7 @@ const App = () => {
       }
     } else {
       try {
-        await fetch(`http://localhost:8889/api/shopping-cart-items`, {
+        await fetch(`http://14.225.207.183:8888/api/shopping-cart-items`, {
           method: "DELETE",
           body: formData,
           headers: {
@@ -193,7 +196,7 @@ const App = () => {
 
     if (quantity !== 0) {
       try {
-        await fetch(`http://localhost:8889/api/shopping-cart-items`, {
+        await fetch(`http://14.225.207.183:8888/api/shopping-cart-items`, {
           method: "PUT",
           body: formData,
           headers: {
@@ -207,7 +210,7 @@ const App = () => {
       }
     } else {
       try {
-        await fetch(`http://localhost:8889/api/shopping-cart-items`, {
+        await fetch(`http://14.225.207.183:8888/api/shopping-cart-items`, {
           method: "DELETE",
           body: formData,
           headers: {
@@ -244,7 +247,7 @@ const App = () => {
     });
 
     try {
-      await fetch(`http://localhost:8889/api/shopping-cart-items`, {
+      await fetch(`http://14.225.207.183:8888/api/shopping-cart-items`, {
         method: "DELETE",
         body: formData,
         headers: {
@@ -260,7 +263,7 @@ const App = () => {
 
   const handleEmptyCart = async () => {
     try {
-      await fetch(`http://localhost:8889/api/shopping-cart-items/clear`, {
+      await fetch(`http://14.225.207.183:8888/api/shopping-cart-items/clear`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -303,7 +306,7 @@ const App = () => {
 
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://localhost:8889/api/shopping-cart-items", {
+      const res = await fetch("http://14.225.207.183:8888/api/shopping-cart-items", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -329,7 +332,7 @@ const App = () => {
         setCart(cart);
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin đơn hàng thất bại");
+      // openSnackbar(SNACKBAR.ERROR, "Phiên đăng nhập cũ đã hết hạn");
     }
   };
 
@@ -346,7 +349,7 @@ const App = () => {
       <AuthProvider>
         <SnackbarProvider>
           <Router>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", height: 'auto' }}>
               <CssBaseline />
               <Navbar
                 totalItems={cart.totalItems}

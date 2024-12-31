@@ -71,7 +71,7 @@ const ModalAddBook = ({ open, handleClose, setOpenAdd }) => {
     });
 
     try {
-      const res = await fetch(`http://localhost:8889/api/books`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/books`, {
         method: "POST",
         body: formData,
         headers: {

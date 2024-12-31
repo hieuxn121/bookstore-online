@@ -44,7 +44,7 @@ const OrderHistory = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch(`http://localhost:8889/api/orders/current-user`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/orders/current-user`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -55,10 +55,10 @@ const OrderHistory = () => {
       if (data.statusCode === "00000") {
         setOrders(data?.data);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Lấy danh sách orders thât bại");
+        openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Lấy danh sách orders thât bại");
+      openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
     }
   };
 

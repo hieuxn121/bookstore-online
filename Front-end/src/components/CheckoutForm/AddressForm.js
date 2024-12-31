@@ -24,7 +24,6 @@ const AddressForm = ({ nextStep, initialValues, setInitialValues }) => {
     initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log("values: ", values);
       setInitialValues(values);
       nextStep();
     },

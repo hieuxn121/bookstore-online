@@ -42,7 +42,7 @@ const Orders = () => {
   const navigate = useNavigate();
   const fetchOrders = async () => {
     try {
-      const res = await fetch(`http://localhost:8889/api/orders/all-user`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/orders/all-user`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ const Orders = () => {
     });
 
     try {
-      const res = await fetch(`http://localhost:8889/api/orders/${orderId}`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/orders/${orderId}`, {
         method: "PUT",
         body: formData,
         headers: {

@@ -34,7 +34,7 @@ const PaymentForm = ({
   });
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://localhost:8889/api/shopping-cart-items", {
+      const res = await fetch("http://14.225.207.183:8888/api/shopping-cart-items", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -123,7 +123,7 @@ const PaymentForm = ({
     });
 
     try {
-      await fetch(`http://localhost:8889/api/orders`, {
+      await fetch(`http://14.225.207.183:8888/api/orders`, {
         method: "POST",
         body: formData,
         headers: {
