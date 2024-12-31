@@ -14,6 +14,8 @@ const getUserDetail = (userId) => rest.get("/detail?userId=" + userId);
 
 const getUsersByEmail = (email) => rest.get("/result?email=" + email);
 
+const listUsers = () => rest.get('/users/dashboard');
+
 export default {
   login,
   signup,
@@ -21,4 +23,5 @@ export default {
   getUsersByEmail,
   sendOtp,
   verify,
+  listUsers
 };

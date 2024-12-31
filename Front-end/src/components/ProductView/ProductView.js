@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Grid, Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { commerce } from "../../lib/commerce";
 import { useState, useEffect } from "react";
 import "./style.css";
 import { bookApi } from "../../apis";
 import { HTTP_STATUS, SNACKBAR } from "../../constants";
+import Comments from "../Comment/Comments";
 
 const createMarkup = (text) => {
   return { __html: text };
@@ -31,7 +31,7 @@ const ProductView = () => {
     <Container className="product-view">
       <Grid container>
         <Grid item xs={12} md={6} className="image-wrapper">
-          <img src={product.imageBase64Src} alt={product.title} />
+          <img src={product?.imageBase64Src} alt={product.title} />
         </Grid>
         <Grid item xs={12} md={5} className="text">
           <Typography variant="h2">
@@ -62,6 +62,7 @@ const ProductView = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Comments bookId={product?.id}/>
     </Container>
   );
 };

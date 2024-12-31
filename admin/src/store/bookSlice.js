@@ -15,7 +15,7 @@ export const getBooks = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const res = await fetch(
-        `http://localhost:8889/api/books?` +
+        `http://14.225.207.183:8888/api/books?` +
           new URLSearchParams({
             ...payload,
           })
@@ -33,7 +33,7 @@ export const getBookId = createAsyncThunk(
   async (item, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch(`http://localhost:8889/api/books/${item}`);
+      const res = await fetch(`http://14.225.207.183:8888/api/books/${item}`);
       const data = await res.json();
       return data;
     } catch (error) {
@@ -53,7 +53,7 @@ export const updateBook = createAsyncThunk(
       formData.append(key, item[key]);
     });
     try {
-      const res = await fetch(`http://localhost:8889/api/books`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/books`, {
         method: "POST",
         body: formData,
         headers: {
@@ -87,7 +87,7 @@ export const insertBook = createAsyncThunk(
     try {
       const state = getState();
       const token = state.users.token;
-      const res = await fetch("http://localhost:8889/api/books", {
+      const res = await fetch("http://14.225.207.183:8888/api/books", {
         method: "POST",
         body: formData,
         headers: {
@@ -118,7 +118,7 @@ export const deleteBook = createAsyncThunk(
     const state = getState();
     const token = state.users.token;
     try {
-      const res = await fetch(`http://localhost:8889/api/books/${item}`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/books/${item}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

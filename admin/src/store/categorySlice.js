@@ -6,7 +6,7 @@ export const getCategories = createAsyncThunk(
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch("http://localhost:8889/api/books/categories");
+      const res = await fetch("http://14.225.207.183:8888/api/books/categories");
       const data = await res.json();
       return data;
     } catch (error) {

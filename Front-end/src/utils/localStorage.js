@@ -1,6 +1,13 @@
 export const getData = (key) => {
   const data = localStorage.getItem(key);
-  if (data) return JSON.parse(data);
+  if (data) {
+    try {
+      return JSON.parse(data);
+    } catch (e) {
+      console.error("Error parsing JSON data:", e);
+      return null;
+    }
+  }
   return null;
 };
 

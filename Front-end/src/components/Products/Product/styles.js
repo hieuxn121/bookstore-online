@@ -20,6 +20,7 @@ export default makeStyles(() => ({
   cardContent: {
     display: "flex",
     justifyContent: "center",
+    height: '50px'
   },
   button: {
     background: "#1C2331",

@@ -44,7 +44,7 @@ const Book = () => {
 
   const handleDeleteBook = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8889/api/books/${id}`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/books/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

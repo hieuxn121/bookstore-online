@@ -116,7 +116,7 @@ const Cart = ({
 
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://localhost:8889/api/shopping-cart-items", {
+      const res = await fetch("http://14.225.207.183:8888/api/shopping-cart-items", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -142,7 +142,8 @@ const Cart = ({
         setCart(cart);
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin đơn hàng thất bại");
+      openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
+
     }
   };
 
@@ -151,7 +152,7 @@ const Cart = ({
   }, []);
 
   return (
-    <Container style={{ marginBottom: "177px" }}>
+    <Container style={{ marginBottom: "177px", minHeight: '409px' }}>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant="h5" gutterBottom>
         <b>Giỏ hàng của bạn</b>

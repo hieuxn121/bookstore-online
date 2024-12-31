@@ -9,6 +9,7 @@ import { userApi } from "../../apis";
 import { useSnackbar } from "../../contexts";
 import { HTTP_STATUS, SNACKBAR } from "../../constants";
 import { getData } from "../../utils/localStorage";
+import { useHistory } from "react-router-dom";
 
 const validationSchema = yup.object().shape({
   fullName: yup.string().required("Tên người dùng không được để trống"),
@@ -22,6 +23,7 @@ const UserProfile = () => {
   const { openSnackbar } = useSnackbar();
   const classes = useStyles();
   const token = getData("token");
+  const history = useHistory();
 
   const [initialValues, setInitialValues] = useState(null);
 
@@ -37,10 +39,10 @@ const UserProfile = () => {
         };
         setInitialValues(userInfor);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
+        openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
+      openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
     }
   };
 
@@ -51,7 +53,7 @@ const UserProfile = () => {
     });
 
     try {
-      const res = await fetch(`http://localhost:8889/api/users`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/users`, {
         method: "PUT",
         body: formData,
         headers: {
@@ -77,7 +79,7 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <Container style={{ marginBottom: "50px" }}>
+    <Container style={{ marginBottom: "50px", minHeight: '535px' }}>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant="h5" gutterBottom>
         <b>Thông tin khách hàng</b>

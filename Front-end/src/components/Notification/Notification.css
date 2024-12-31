@@ -1,0 +1,116 @@
+.notification-container {
+    width: 350px;
+    position: absolute;
+    top: 70px;
+    background-color: #1C2331;
+    right: 30px;
+  }
+  
+  .notification-icon {
+    font-size: 1.5rem;
+  }
+  
+  .text-muted {
+    font-size: 0.875rem;
+  }
+  
+  .noti-item {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .notification-header {
+    background-color: #F2F0F0;
+  }
+  
+  .mark-read {
+    border: 3px solid rgb(243, 169, 161);
+    padding: 3px 5px;
+    color: rgb(243, 169, 161);
+  }
+  
+  .check-read-icon {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid rgb(243, 169, 161);
+  }
+  
+  .check-read {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    height: 70px;
+    margin-right: 1rem !important;
+  }
+  
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .toggle-text {
+    font-size: 14px;
+    color: #ccc;
+    transition: color 0.3s ease;
+  }
+  
+  .toggle-text.active {
+    color: #007bff; /* Màu xanh khi được chọn */
+    font-weight: bold;
+  }
+  
+  .toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 25px;
+  }
+  
+  .toggle-input {
+    display: none;
+  }
+  
+  .toggle-label {
+    display: block;
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-input:checked + .toggle-label {
+    background-color: #007bff; /* Màu xanh khi bật */
+  }
+  
+  .toggle-inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-switch-button {
+    display: block;
+    width: 21px;
+    height: 21px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-input:checked + .toggle-label .toggle-switch-button {
+    transform: translateX(25px);
+  }

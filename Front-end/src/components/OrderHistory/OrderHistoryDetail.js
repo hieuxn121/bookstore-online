@@ -14,6 +14,7 @@ import { getData } from "../../utils/localStorage";
 import { useParams } from "react-router-dom";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
+
 const OrderHistoryDetail = () => {
   const classes = useStyles();
   const { openSnackbar } = useSnackbar();
@@ -23,7 +24,7 @@ const OrderHistoryDetail = () => {
   const [orderDetail, setOrderDetail] = useState({});
   const fetchOrders = async () => {
     try {
-      const res = await fetch(`http://localhost:8889/api/orders/${id}`, {
+      const res = await fetch(`http://14.225.207.183:8888/api/orders/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

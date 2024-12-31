@@ -45,10 +45,10 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         };
         setInitialValues(userInfor);
       } else {
-        openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
+        openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
       }
     } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, "Lấy thông tin người dùng thất bại");
+      openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
     }
   };
 

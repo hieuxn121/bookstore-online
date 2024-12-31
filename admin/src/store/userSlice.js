@@ -11,7 +11,7 @@ export const getUsers = createAsyncThunk(
     const token = getData("token");
 
     try {
-      const res = await fetch("http://localhost:8889/api/users/dashboard", {
+      const res = await fetch("http://14.225.207.183:8888/api/users/dashboard", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -36,7 +36,7 @@ export const login = createAsyncThunk(
     try {
       const state = getState();
       const token = state.users.token;
-      const res = await fetch("http://localhost:8889/api/users/login", {
+      const res = await fetch("http://14.225.207.183:8888/api/users/login", {
         method: "POST",
         body: JSON.stringify(credentials),
         headers: {

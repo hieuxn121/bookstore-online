@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,7 +7,7 @@ import {
   Typography,
   Avatar,
 } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
+import { ShoppingCart, NotificationsActiveRounded } from "@material-ui/icons";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ViewListIcon from "@material-ui/icons/ViewList";
@@ -18,6 +18,9 @@ import { getData, delData } from "../../utils/localStorage";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router-dom";
+import { notificationApi } from "../../apis";
+import { HTTP_STATUS } from "../../constants";
+import Notification from '../Notification/Notification';
 
 const Navbar = ({ totalItems }) => {
   const classes = useStyles();
@@ -25,6 +28,8 @@ const Navbar = ({ totalItems }) => {
   const token = getData("token");
   const user = getData("user");
   const [anchorEl, setAnchorEl] = useState(null);
+  const [noti, setNoti] = useState(false);
+  const [countNoti, setCountNoti] = useState(0);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -32,6 +37,35 @@ const Navbar = ({ totalItems }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const fetchCountUnread = async () => {
+    try {
+      const { data, status } = await notificationApi.listNotificationsUnread(user?.id);
+      if (status === HTTP_STATUS.OK) {
+        if (data.statusCode === "00000") {
+          setCountNoti(data.data);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  window.fetchCountUnread = fetchCountUnread;
+
+  useEffect(() => {
+    fetchCountUnread();
+    const interval = setInterval(fetchCountUnread, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleOpenNoti = () => {
+    if(token) {
+      setNoti(!noti);
+    } else {
+      history.push("/login");
+    }
   };
 
   return (
@@ -50,6 +84,9 @@ const Navbar = ({ totalItems }) => {
               alt="Book Store App"
               height="50px"
               className={classes.image}
+              style={{
+                cursor: 'pointer'
+              }}
             />
             <strong>Nta-bookstore</strong>
           </Typography>
@@ -64,7 +101,7 @@ const Navbar = ({ totalItems }) => {
                       {user.email}
                     </h5>
                   </Typography>
-                  <Avatar onClick={handleClick} style={{ marginTop: "5px" }} />
+                  <Avatar onClick={handleClick} style={{ marginTop: "5px" , cursor: 'pointer' }} />
                 </>
                 <Menu
                   id="vertical-menu"
@@ -83,13 +120,14 @@ const Navbar = ({ totalItems }) => {
                   style={{ marginTop: "50px" }}
                 >
                   <MenuItem onClick={handleClose}>
-                    <Badge
-                      color="secondary"
-                      onClick={() => history.push("/user-profile")}
-                    >
-                      <PersonIcon />
-                      <h5>Hồ sơ</h5>
-                    </Badge>
+                    <div onClick={() => history.push("/user-profile")}>
+                      <Badge
+                        color="secondary"
+                      >
+                        <PersonIcon />
+                        <h5>Hồ sơ</h5>
+                      </Badge>
+                    </div>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
                     <Badge
@@ -138,6 +176,16 @@ const Navbar = ({ totalItems }) => {
                 <ShoppingCart />
               </Badge>
             </IconButton>
+            <IconButton
+              aria-label="Show cart items"
+              color="inherit"
+              onClick={handleOpenNoti}
+            >
+              <Badge badgeContent={countNoti} color="secondary">
+                <NotificationsActiveRounded />
+              </Badge>
+            </IconButton>
+            {noti && <Notification />}
           </div>
         </Toolbar>
       </AppBar>

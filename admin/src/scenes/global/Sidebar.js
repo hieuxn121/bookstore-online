@@ -7,10 +7,8 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { useDispatch } from "react-redux";
 import { BookRounded, CategoryOutlined } from "@mui/icons-material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { userAction } from "../../store/userSlice";
 import { getData } from "../../utils/localStorage";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -109,13 +107,13 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            {/* <Item
+            <Item
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
             <Typography
               variant="h6"
               color={colors.grey[300]}

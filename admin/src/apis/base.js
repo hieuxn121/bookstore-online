@@ -2,7 +2,7 @@ import axios from "axios";
 import { METHOD } from "../constants";
 import { getData } from "../utils/localStorage";
 
-const baseURL = "http://localhost:8889/api";
+const baseURL = "http://14.225.207.183:8888/api";
 const cancelToken = axios.CancelToken;
 const source = cancelToken.source();
 

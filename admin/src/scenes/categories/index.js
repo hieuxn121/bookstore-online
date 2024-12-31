@@ -18,6 +18,7 @@ const Category = () => {
   }, [dispatch]);
 
   const { categories } = useSelector((state) => state.categories);
+  console.log('categories: ', categories)
   const categoriesConverted = Object.keys(categories).map((key) => ({
     key,
     value: categories[key],

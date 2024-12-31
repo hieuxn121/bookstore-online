@@ -37,7 +37,7 @@ const Product = ({ product, onAddToCart, categories }) => {
         </CardActionArea>
       </Link>
       <CardContent>
-        <div className={classes.cardContent}>
+        <div className={classes.cardContent} style={{height: '60px', marginBottom: '10px'}}>
           <Typography variant="h6">{product?.title}</Typography>
         </div>
         <div className={classes.cardContent}>
@@ -63,6 +63,7 @@ const Product = ({ product, onAddToCart, categories }) => {
           className={classes.button}
           endIcon={<AddShoppingCart />}
           onClick={handleAddToCart}
+          style={{ fontSize: '12px' }}
         >
           <b>Thêm vào giỏ hàng</b>
         </Button>
