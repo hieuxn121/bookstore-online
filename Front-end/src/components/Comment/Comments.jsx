@@ -32,7 +32,7 @@ function gen_comments(comments, colorindex, path) {
         colorindex={colorindex}
         key={i}
         path={[...path, i]}
-        comments={comment.children}
+        comments={comment.children?.reverse()}
         children={comment?.parentCommentId}
       />
     );
@@ -40,17 +40,19 @@ function gen_comments(comments, colorindex, path) {
 }
 
 function Reply(props) {
+  const { id } = useParams();
+  const bookId = id;
   const auth = useAuth();
   const user = auth?.user;
   const [text, setText] = useState("");
   const { openSnackbar } = useSnackbar();
 
   const hanldeSubmitComment = async () => {
-    if(text !== "") {
+    if(text !== "" && bookId) {
       try {
         const payload = {
           id: null,
-          bookId: 1,
+          bookId: bookId,
           parentCommentId: props.parentCommentId || null,
           replyToUserId: props.userId || null,
           content: text,
@@ -464,98 +466,15 @@ function Comments(props) {
   const bookId = id;
   const { openSnackbar } = useSnackbar();
   var [replying, setReplying] = useState([]);
-  var [comments, setComments] = useState([
-    {
-      username: "Kevin",
-      date: "3 hours ago",
-      text: "#Hello\n>quote\n\n`code`",
-      votes: 12,
-      comments: [
-        {
-          username: "Kevin",
-          date: "2 hours ago",
-          text: "^ click the minimize button to hide threads",
-          votes: 8,
-          comments: [
-            {
-              username: "Kevin",
-              date: "1 hours ago",
-              text: "<- Click the arrows to vote",
-              votes: 3,
-              comments: []
-            }
-          ]
-        },
-        {
-          username: "Kevin",
-          date: "4 hours ago",
-          text: "click on reply to open up a text prompt",
-          votes: 5,
-          comments: []
-        },
-        {
-          username: "Kevin",
-          date: "4 hours ago",
-          text: "click on reply to open up a text prompt",
-          votes: 5,
-          comments: []
-        },
-        {
-          username: "Kevin",
-          date: "4 hours ago",
-          text: "click on reply to open up a text prompt",
-          votes: 5,
-          comments: []
-        },
-        {
-          username: "Kevin",
-          date: "10 mins ago",
-          text: "this",
-          votes: 2,
-          comments: [
-            {
-              username: "Kevin",
-              date: "8 mins ago",
-              text: "is",
-              votes: 1,
-              comments: [
-                {
-                  username: "Kevin",
-                  date: "5 mins ago",
-                  text: "to",
-                  votes: 0,
-                  comments: [
-                    {
-                      username: "Kevin",
-                      date: "4 mins ago",
-                      text: "show",
-                      votes: -1,
-                      comments: [
-                        {
-                          username: "Kevin",
-                          date: "2 mins ago",
-                          text: "nesting",
-                          votes: -200,
-                          comments: []
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]);
+  var [comments, setComments] = useState([]);
+  const count = comments?.map((comment) => comment.children.length).reduce((a, b) => a + b, 0) + comments.length;
 
   async function fetchComments() {
     try {
       const { data, status } = await commentApi.listCommentInBook(bookId);
       if (status === HTTP_STATUS.OK) {
         if(data?.statusCode === "00000") {
-          setComments(data?.data);
+          setComments(data?.data?.reverse());
         }
       }
     } catch (error) {
@@ -574,7 +493,7 @@ function Comments(props) {
   return (
     <Card {...props}>
       <span id="comments">Comments</span>
-      <span id="comments_count">(9)</span>
+      <span id="comments_count">{`(${count})`}</span>
       <Reply />
       <CommentContext.Provider value={[replying, setReplying]}>
         {gen_comments(comments, 0, [])}

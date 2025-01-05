@@ -29,9 +29,9 @@ const Notification = () => {
       if (status === HTTP_STATUS.OK) {
         if (data.statusCode === "00000") {
           let notis = data.data?.map((item) => {
+            const customDate = moment(item?.modifiedAt).format("YY-MM-dd");
+            const time = moment(item?.modifiedAt).format("HH:mm:ss");
             if(item?.type === "COMMENT") {
-              const customDate = moment(item?.modifiedAt).format("YY-MM-dd");
-              const time = moment(item?.modifiedAt).format("HH:mm:ss");
               return {
                 ...item,
                 icon: "💬",
@@ -40,11 +40,9 @@ const Notification = () => {
                 date: customDate
               }
             } else {
-              const customDate = moment(item?.modifiedAt).format("YY-MM-dd");
-              const time = moment(item?.modifiedAt).format("HH:mm:ss");
               return {
                 ...item,
-                icon: "💬",
+                icon: "🔔",
                 message: item?.message,
                 time: time,
                 date: customDate
@@ -64,7 +62,6 @@ const Notification = () => {
         openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
       }
     } catch (error) {
-      console.log('error', error);
       openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
     }
   };
