@@ -129,6 +129,7 @@ const Book = () => {
       field: "update",
       headerName: "Cập nhật sách",
       flex: 0.3,
+      sortable: false,
       renderCell: ({ row: { id } }) => {
         return (
           <>

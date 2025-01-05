@@ -1,10 +1,23 @@
 import { Box, Button, useTheme } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, GridToolbarExport, GridCsvExportOptions } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../store/userSlice";
+
+const CustomToolbar = () => {
+  const csvOptions = {
+    utf8WithBom: true,
+    fileName: "users_data",
+  };
+
+  return (
+    <GridToolbar>
+      <GridToolbarExport csvOptions={csvOptions} />
+    </GridToolbar>
+  );
+};
 
 const User = () => {
   const theme = useTheme();
@@ -77,7 +90,7 @@ const User = () => {
         <DataGrid
           rows={users}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
+          components={{ Toolbar: CustomToolbar }}
           getRowId={(row) => row.id}
           pageSize={10}
           pageSizeOptions={[10]}

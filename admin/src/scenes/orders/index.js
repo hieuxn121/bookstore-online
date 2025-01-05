@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, GridToolbarExport } from "@mui/x-data-grid";
 import { Button, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -30,6 +30,19 @@ const oderStatusList = [
   { key: "COMPLETED", value: "Hoàn thành" },
   { key: "PENDING", value: "Đang chờ" },
 ];
+
+const CustomToolbar = () => {
+  const csvOptions = {
+    utf8WithBom: true,
+    fileName: "orders_data",
+  };
+
+  return (
+    <GridToolbar>
+      <GridToolbarExport csvOptions={csvOptions} />
+    </GridToolbar>
+  );
+};
 
 const Orders = () => {
   const classes = useStyles();
@@ -187,7 +200,7 @@ const Orders = () => {
           autoWidth
           rows={orders}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
+          components={{ Toolbar: CustomToolbar }}
           getRowId={(row) => row.orderId}
           pageSize={10}
           pageSizeOptions={[10]}

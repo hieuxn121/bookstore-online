@@ -47,7 +47,7 @@ const SigninForm = () => {
             },
             data.data.accessToken,
             () => {
-              window.location.href = "/books";
+              window.location.href = "/";
             }
           );
         } else {

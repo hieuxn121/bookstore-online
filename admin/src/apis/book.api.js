@@ -5,6 +5,12 @@ const listbooks = (title='', author='', category='', page='', size='') =>
     `/books?title=${title}&author=${author}&category=${category}&page=${page}&size=${size}`
   );
 
+const dashboard = () =>
+  rest.get(
+    `/admin/dashboard/statistic`
+  );
+
 export default {
   listbooks,
+  dashboard
 };

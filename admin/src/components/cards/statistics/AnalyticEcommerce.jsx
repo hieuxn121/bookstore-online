@@ -35,7 +35,7 @@ export default function AnalyticEcommerce({ color = 'primary', title, count, per
                 variant="combined"
                 color={color}
                 // icon={isLoss ? <FallOutlined style={iconSX} /> : <RiseOutlined style={iconSX} />}
-                label={`${percentage}%`}
+                label={`${percentage}`}
                 sx={{ ml: 1.25, pl: 1 }}
                 size="small"
               />
