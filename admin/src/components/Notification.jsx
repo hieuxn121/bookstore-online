@@ -39,6 +39,16 @@ const Notifications = () => {
                 time: time,
                 date: customDate
               }
+            } else {
+              const customDate = moment(item?.modifiedAt).format("YY-MM-dd");
+              const time = moment(item?.modifiedAt).format("HH:mm:ss");
+              return {
+                ...item,
+                icon: "💬",
+                message: item?.message,
+                time: time,
+                date: customDate
+              }
             }
           });
           if(limit) {

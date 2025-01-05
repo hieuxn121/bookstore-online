@@ -39,6 +39,16 @@ const Notification = () => {
                 time: time,
                 date: customDate
               }
+            } else {
+              const customDate = moment(item?.modifiedAt).format("YY-MM-dd");
+              const time = moment(item?.modifiedAt).format("HH:mm:ss");
+              return {
+                ...item,
+                icon: "💬",
+                message: item?.message,
+                time: time,
+                date: customDate
+              }
             }
           });
           if(limit) {
@@ -54,6 +64,7 @@ const Notification = () => {
         openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
       }
     } catch (error) {
+      console.log('error', error);
       openSnackbar(SNACKBAR.ERROR, "Đăng nhập lại để tiếp tục");
     }
   };
@@ -127,10 +138,10 @@ const Notification = () => {
         </div>
       </div>
       <div style={{ maxHeight: "450px", overflowY: "auto" }}>
-        {notifications.map((note, index) => (
+        {notifications?.length > 0 && notifications?.map((note, index) => (
           <div
             key={index}
-            style={{ backgroundColor: note.isRead ? "white" : "#f1f1f1", color: "black" }}
+            style={{ backgroundColor: note?.isRead ? "white" : "#f1f1f1", color: "black" }}
             className="d-flex align-items-center justify-content-between p-3 noti-item"
           >
             <div className="d-flex align-items-center">
@@ -140,20 +151,20 @@ const Notification = () => {
                     handleUpdateNoti(note);
                   }}
                   style={{ 
-                    backgroundColor: !note.isRead ? "rgb(243, 169, 161)" : "transparent",
-                    cursor: !note.isRead ? "pointer" : "none"
+                    backgroundColor: !note?.isRead ? "rgb(243, 169, 161)" : "transparent",
+                    cursor: !note?.isRead ? "pointer" : "none"
                   }}>
                 </span>
-                <span className="notification-icon">{note.icon}</span>
+                <span className="notification-icon">{note?.icon}</span>
               </div> 
               <div>
-                <p className="mb-1 fw-bold">{note.message}</p>
-                {note.extra && <p className="text-muted small mb-0">{note.extra}</p>}
-                {note.date && <p className="small">{note.date}</p>}
+                <p className="mb-1 fw-bold">{note?.message}</p>
+                {note?.extra && <p className="text-muted small mb-0">{note?.extra}</p>}
+                {note?.date && <p className="small">{note?.date}</p>}
               </div>
             </div>
             <div className="text-muted small" style={{ color: "white", fontSize: "11px" }}>
-              <p className="mb-1">{note.time}</p>
+              <p className="mb-1">{note?.time}</p>
 
             </div>
           </div>
